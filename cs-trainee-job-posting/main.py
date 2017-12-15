@@ -3,18 +3,6 @@ import openpyxl
 import requests
 
 
-"""
-S.No.
-Company Name
-Address
-Email id
-Contact Person Name
-Requirement
-Location
-Posted on
-"""
-
-
 def download_file():
     url = 'http://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'
     local_filename = '/tmp/' + url.split('/')[-1]
@@ -54,6 +42,16 @@ def max_row(sheet):
 
 
 def post_to_cs_trainee(row):
+    """
+    S.No.
+    Company Name
+    Address
+    Email id
+    Contact Person Name
+    Requirement
+    Location
+    Posted on
+    """
     url = 'https://forum.csclub.co/posts'
     payload = {
         "api_key": "ef759d736fc5495f16fd29eef742e822cd1203c81a9e871eef863b3dc10aad2f",
