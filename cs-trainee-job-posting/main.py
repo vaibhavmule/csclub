@@ -3,9 +3,6 @@ import openpyxl
 import requests
 
 
-wb = openpyxl.load_workbook('Requirement.xlsx')
-sheet = wb.active
-
 """
 S.No.
 Company Name
@@ -15,8 +12,20 @@ Contact Person Name
 Requirement
 Location
 Posted on
-
 """
+
+
+def download_file():
+    url = 'http://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'
+    local_filename = '/tmp/' + url.split('/')[-1]
+    print('Downloading File...', local_filename)
+    r = requests.get(url, stream=True)
+    with open(local_filename, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:
+                f.write(chunk)
+    print('Downloaded')
+    return local_filename
 
 
 def str_to_date(s):
@@ -28,12 +37,12 @@ def str_to_date(s):
         return None
 
 
-def max_row():
+def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=5)
+    now = datetime.now() - timedelta(days=3)
 
-    for col in h_column[2:20]:
+    for col in h_column[2:25]:
         if isinstance(col.value, datetime) and col.value.date() > now.date():
             max_col += 1
         elif isinstance(col.value, str) and str_to_date(col.value) and str_to_date(col.value) > now.date():
@@ -45,19 +54,20 @@ def max_row():
 
 
 def post_to_cs_trainee(row):
-    url = 'http://forum.csclub.co/posts'
+    url = 'https://forum.csclub.co/posts'
     payload = {
         "api_key": "ef759d736fc5495f16fd29eef742e822cd1203c81a9e871eef863b3dc10aad2f",
         "api_username": "vaibhavmule",
-        "title": "{} Looking for CS Trainees in {}".format(row[1].value, row[6].value),
-        "raw": "**Company Name:** {} \n **Requirement:** {} \n **Address:** {} \n **Location:** {} \n, **Email:** {} \n **Contact Person:** {} \n **Source:** {} at [ICSI](https://www.icsi.edu/Docs/Webmodules/Requirement.xlsx)".format(
+        "title": "{} Looking for CS Trainees in {}".format(
+            row[1].value, row[6].value),
+        "raw": "**Company Name:** {} \n**Requirement:** {} \n**Address:** {} \n**Location:** {} \n**Email:** {} \n**Contact Person:** {} \n\n **Source:** {} at [ICSI](https://www.icsi.edu/Docs/Webmodules/Requirement.xlsx)".format(
             row[1].value,
             row[5].value,
             row[2].value,
             row[6].value,
             row[3].value,
             row[4].value,
-            row[7].value,),
+            row[7].value.date(),),
         "category": 6,  # cs trainees category
     }
     print(payload)
@@ -66,7 +76,10 @@ def post_to_cs_trainee(row):
 
 
 def main():
-    mx_row = max_row()
+    file_path = download_file()
+    wb = openpyxl.load_workbook(file_path)
+    sheet = wb.active
+    mx_row = max_row(sheet)
 
     if mx_row > 2:
         for row in sheet.iter_rows(min_row=3, max_col=8, max_row=mx_row):
