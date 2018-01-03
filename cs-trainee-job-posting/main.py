@@ -28,12 +28,15 @@ def str_to_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=3)
+    now = datetime.now() - timedelta(days=0)
 
     for col in h_column[2:25]:
-        if isinstance(col.value, datetime) and col.value.date() > now.date():
+        d = col.value
+        if d.month == 1 and d.year == 2017:
+            d = d.replace(d.date().year + 1)
+        if isinstance(d, datetime) and d.date() >= now.date():
             max_col += 1
-        elif isinstance(col.value, str) and str_to_date(col.value) and str_to_date(col.value) > now.date():
+        elif isinstance(d, str) and str_to_date(d) and str_to_date(d) >= now.date():
             max_col += 1
         else:
             break
@@ -78,7 +81,7 @@ def main():
     wb = openpyxl.load_workbook(file_path)
     sheet = wb.active
     mx_row = max_row(sheet)
-
+    # print(mx_row)
     if mx_row > 2:
         for row in sheet.iter_rows(min_row=3, max_col=8, max_row=mx_row):
             post_to_cs_trainee(tuple(row))
