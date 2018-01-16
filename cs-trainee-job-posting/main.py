@@ -18,8 +18,10 @@ def download_file():
 
 def str_to_date(s):
     if s.startswith('Reposted on '):
-        return datetime.strptime(
+        dt = datetime.strptime(
             s.replace('Reposted on ', ''), '%d-%m-%Y').date()
+        print('dt', dt)
+        return dt
     else:
         # todo - email to me
         return None
@@ -28,15 +30,15 @@ def str_to_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=0)
+    now = datetime.now() - timedelta(days=5)
 
     for col in h_column[2:25]:
         d = col.value
-        if d.month == 1 and d.year == 2017:
-            d = d.replace(d.date().year + 1)
-        if isinstance(d, datetime) and d.date() >= now.date():
+        if isinstance(d, str) and str_to_date(d) and str_to_date(d) >= now.date():
             max_col += 1
-        elif isinstance(d, str) and str_to_date(d) and str_to_date(d) >= now.date():
+        elif d.month == 1 and d.year == 2017:
+            d = d.replace(d.date().year + 1)
+        elif isinstance(d, datetime) and d.date() >= now.date():
             max_col += 1
         else:
             break
@@ -68,12 +70,14 @@ def post_to_cs_trainee(row):
             row[6].value,
             row[3].value,
             row[4].value,
-            row[7].value.date(),),
+            row[7].value,),
         "category": 6,  # cs trainees category
+        "tags": ["".join(row[6].value.split()).lower()],
+        "tags": [],
     }
     print(payload)
     r = requests.post(url, data=payload)
-    print(r.text)
+    print('response', r.text, r.status_code)
 
 
 def main():
