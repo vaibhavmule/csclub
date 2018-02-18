@@ -80,6 +80,10 @@ def post_to_cs_trainee(row):
     print('response', r.text, r.status_code)
 
 
+def close_job_posting():
+	pass
+
+
 def main():
     file_path = download_file()
     wb = openpyxl.load_workbook(file_path)
