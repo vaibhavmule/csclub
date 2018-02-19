@@ -30,7 +30,7 @@ def str_to_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=11)
+    now = datetime.now() - timedelta(days=3)
 
     for col in h_column[2:25]:
         d = col.value
