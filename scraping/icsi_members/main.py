@@ -51,7 +51,7 @@ class MemberFinderScraper(object):
         writer = csv.writer(emailscsv)
 
         while True:
-            if pageno == 5:
+            if pageno == 4573:
                 break 
             s = BeautifulSoup(self.driver.page_source, "lxml")
             id_r = re.compile(
@@ -69,7 +69,7 @@ class MemberFinderScraper(object):
                 next_page_elem = self.driver.find_element_by_xpath(
                     '//*[@id="dnn_ctr410_MemberSearch_grdMembers_ctl00"]/thead/tr[2]/td/table/tbody/tr/td/div[3]/input[1]')
             except NoSuchElementException:
-                pass
+                print('no such element')
                 # break # no more pages
 
             print('page ', pageno, '\n')
@@ -82,7 +82,7 @@ class MemberFinderScraper(object):
                     '#dnn_ctr410_MemberSearch_grdMembers_ctl00 > thead > tr.rgPager > td > table > tbody > tr > td > div.rgWrap.rgNumPart > a.rgCurrentPage > span')
                 print(element.text, 'stopped')
                 return int(element.text) == pageno
-            wait = WebDriverWait(self.driver, 40)
+            wait = WebDriverWait(self.driver, 120)
             wait.until(next_page)
             pageno += 1
 
