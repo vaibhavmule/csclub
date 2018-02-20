@@ -1,6 +1,7 @@
 import os
 import re
 import csv
+import time
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -36,7 +37,6 @@ class MemberFinderScraper(object):
         handle = wait.until(EC.presence_of_element_located((
             By.XPATH, '//*[@id="dnn_ctr410_MemberSearch_pnlHolder"]')))
 
-
         # select = self.driver.find_element_by_id('dnn_ctr410_MemberSearch_grdMembers_ctl00_ctl02_ctl01_PageSizeComboBox_Input').click()
         # wait = WebDriverWait(self.driver, 20)
         # select_element = wait.until(EC.visibility_of_element_located((
@@ -52,7 +52,14 @@ class MemberFinderScraper(object):
 
         while True:
             if pageno == 4573:
-                break 
+                break
+
+            if pageno in range(10, 5000, 10):
+                time.sleep(1)
+
+            if pageno in range(100, 5000, 100):
+                time.sleep(5)
+
             s = BeautifulSoup(self.driver.page_source, "lxml")
             id_r = re.compile(
                 r'dnn_ctr410_MemberSearch_grdMembers_ctl00_ctl([A-Z0-9-]+)_lblEmail')
@@ -74,6 +81,7 @@ class MemberFinderScraper(object):
 
             print('page ', pageno, '\n')
             next_page_elem.click()
+
             def next_page(driver):
                 '''
                 Wait until the next page comes.
