@@ -32,6 +32,11 @@ def str_to_date(s):
             s.replace('Re-posted on ', ''), '%d-%m-%Y').date()
         print('dt', dt)
         return dt
+    elif s.startswith('Resposted on '):
+        dt = datetime.strptime(
+            s.replace('Resposted on ', ''), '%d/%m/%Y').date()
+        print('dt', dt)
+        return dt
     else:
         # todo - email to me
         return datetime.strptime(s, '%d/%m/%Y').date()
@@ -40,9 +45,11 @@ def str_to_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=7)
+    now = datetime.now() - timedelta(days=60)
     for col in h_column[2:20]:
         d = col.value
+
+        # print(isinstance(d, datetime), d.date(), now.date())
 
         if isinstance(d, datetime) and d.date() >= now.date():
             max_col += 1
