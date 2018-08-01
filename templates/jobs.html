@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Jobs{% endblock %}
+{% block content %}
+<div>
+  <h2>CS Trainee Vacancies and CS Jobs</h2>
+  <ul>
+  {% for job in jobs %}
+    <li>
+      <a href="{% url 'job_detail' job.id %}">
+        {{job.title}}
+        <small>{{job.employer.title}}</small>
+      </a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
