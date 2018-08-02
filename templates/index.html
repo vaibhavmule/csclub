@@ -1,5 +1,80 @@
 {% extends "base.html" %}
 {% block title %}Job board for CS Trainee Vacancy and CS Jobs{% endblock %}
 {% block content %}
-<h1 class="title is-1">Search CS Jobs and CS Trainee Vacancies</h1>
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-4">CS Trainee Vacancies and CS Jobs</h2>
+    </div>
+  </div>
+</section>
+  <section class="section">
+    <div class="container">
+
+      <div class="columns">
+
+  <div class="column">
+      {% for job in jobs %}
+    <a href="{% url 'job_detail' job.id %}">
+      <div class="box">
+        <div class="columns is-mobile">
+          <div class="column is-narrow">
+              <figure class="image is-64x64 ">
+ <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
+</figure>
+              
+          </div>
+          <div class="column">
+            <span class="is-size-5">{{job.title}}</span>
+
+                              {% for employment_type in job.employment_type.all %}
+              <span class="tag is-link">{{employment_type.title}}</span>
+              {% endfor %}
+<br/>
+<br/>
+<h2 class="subtitle has-text-grey"><small>
+
+                <span class="icon is-small">
+                <i class="fas fa-briefcase"></i>
+                </span>
+                  &nbsp;{{job.employer.title}}
+
+
+                  <br/>
+                              <span class="icon is-small">
+                <i class="fas fa-map-marker"></i>
+              
+              </span>
+                   &nbsp;{{job.location}}</small></h2>
+            <p><h2 class="title is-6"></h2>
+
+
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </a><br>
+        {% endfor %}
+  </div>
+
+  <div class="column is-4">
+    <div class="box">
+      <p class="title is-5">Subscribe to our newsletter</p>
+    </div>
+  </div>
+</div>
+
+
+    
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </a>
+
+</div>
+    </div>
+  </section>
 {% endblock %}

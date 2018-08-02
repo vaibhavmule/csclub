@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from jobboard.models import Job
 
 
 def home(request):
-    return render(request, 'index.html', {})
+    jobs = Job.objects.all()
+    return render(request, 'index.html', {'jobs': jobs})
 
 
 def about(request):
@@ -11,4 +13,3 @@ def about(request):
 
 def privacy(request):
     return render(request, 'privacy.html', {})
-

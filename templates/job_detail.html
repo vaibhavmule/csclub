@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 {% block title %}CSClub{% endblock %}
 {% block content %}
-
-<div>
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-4">{{job.title}}</h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+  <div class="columns">
+    <div class="column">
+      <div>
   <h2 class="title is-2">{{job.title}}</h2>
     <p><strong>Location:</strong>
     {{job.location}}</p>
@@ -46,4 +56,13 @@
    <p>Expiration date: {{job.expiry_date|date:"d-m-Y"}}</p>
   <p>Date Posted: {{job.date_posted|date:"d-m-Y"}}</p>
 </div>
+    </div>
+      <div class="column is-4">
+    <div class="box">
+      <p class="title is-5">Subscribe to our newsletter</p>
+    </div>
+  </div>
+  </div>
+  </div>
+</section>
 {% endblock %}
