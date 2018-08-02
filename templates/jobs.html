@@ -1,17 +1,35 @@
 {% extends "base.html" %}
 {% block title %}Jobs{% endblock %}
 {% block content %}
-<div>
-  <h2>CS Trainee Vacancies and CS Jobs</h2>
-  <ul>
+<div class="content">
+  <h2 class="title is-2">CS Trainee Vacancies and CS Jobs</h2>
   {% for job in jobs %}
-    <li>
+
+
+
+    
       <a href="{% url 'job_detail' job.id %}">
-        {{job.title}}
-        <small>{{job.employer.title}}</small>
+
+  <div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="{{ job.employer.logo.url }}" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">{{job.title}}</p>
+        <svg class="svg-inline--fa fa-briefcase fa-w-16" aria-hidden="true" data-prefix="fa" data-icon="briefcase" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M320 288h192v144c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V288h192v20c0 6.627 5.373 12 12 12h104c6.627 0 12-5.373 12-12v-20zm192-112v80H0v-80c0-26.51 21.49-48 48-48h80V80c0-26.51 21.49-48 48-48h160c26.51 0 48 21.49 48 48v48h80c26.51 0 48 21.49 48 48zM320 96H192v32h128V96z"></path></svg>
+{{job.employer.title}}
+        <svg class="svg-inline--fa fa-map-marker fa-w-12" aria-hidden="true" data-prefix="fa" data-icon="map-marker" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"></path></svg>
+{{job.location}}
+      </div>
+    </div>
+  </div>
+</div>
+        
       </a>
-    </li>
   {% endfor %}
-  </ul>
 </div>
 {% endblock %}
