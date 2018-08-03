@@ -1,10 +1,13 @@
 {% extends "base.html" %}
-{% block title %}CSClub{% endblock %}
+{% block title %}{{job.title}} at {{job.employer.title}}{% endblock %}
 {% block content %}
 <section class="hero is-light">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-4">{{job.title}}</h2>
+      <h2 class="title is-4">{{job.title}}
+                              {% for employment_type in job.employment_type.all %}
+              <span class="tag is-link">{{employment_type.title}}</span>
+              {% endfor %}</h2>
     </div>
   </div>
 </section>
@@ -12,8 +15,12 @@
   <div class="container">
   <div class="columns">
     <div class="column">
-      <div>
-  <h2 class="title is-2">{{job.title}}</h2>
+      <div class="box">
+                      <figure class="image is-64x64 ">
+ <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
+</figure>
+{{job.employer.title}}
+<a href="{{job.employer.website}}">Website</a>
     <p><strong>Location:</strong>
     {{job.location}}</p>
   <p>
