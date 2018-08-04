@@ -1,12 +1,17 @@
 from django.db import models
+from django.utils import timezone
 
 
 class BaseModel(models.Model):
-    created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
+
+
+def from_now_30_days():
+    return timezone.now() + timezone.timedelta(days=30)
 
 
 class Job(BaseModel):
@@ -16,7 +21,7 @@ class Job(BaseModel):
     employment_type = models.ManyToManyField('EmploymentType')
     employer = models.ForeignKey('Employer', on_delete=models.PROTECT)
     location = models.CharField(max_length=150)
-    expiry_date = models.DateTimeField()
+    expiry_date = models.DateTimeField(default=from_now_30_days)
     salary = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
     UNIT_CHOICES = (
         ('M', 'Month'),
@@ -43,8 +48,22 @@ class EmploymentType(BaseModel):
 
 class Employer(BaseModel):
     title = models.CharField(max_length=150)
-    website = models.URLField()
-    logo = models.ImageField(upload_to='logo/')
+    website = models.URLField(null=True, blank=True)
+    logo = models.ImageField(
+        upload_to='logo/', default='default.jpg')
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        unique_together = ("title", "website")
+
+
+class AddJobLog(BaseModel):
+    last_modified = models.DateTimeField()
+    etag = models.CharField(max_length=50)
+    content_length = models.IntegerField()
+    is_downloaded = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.content_length)
