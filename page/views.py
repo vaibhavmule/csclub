@@ -3,7 +3,7 @@ from jobboard.models import Job
 
 
 def home(request):
-    jobs = Job.objects.all()
+    jobs = Job.objects.all().order_by('-date_posted')
     return render(request, 'index.html', {'jobs': jobs})
 
 
