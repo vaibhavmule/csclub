@@ -8,6 +8,6 @@ def jobs(request):
     return render(request, 'jobs.html', {'jobs': jobs})
 
 
-def job_detail(request, id):
-    job = Job.objects.get(id=id)
+def job_detail(request, slug):
+    job = Job.objects.get(slug=slug)
     return render(request, 'job_detail.html', {'job': job})

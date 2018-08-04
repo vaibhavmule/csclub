@@ -15,7 +15,7 @@
 
   <div class="column">
       {% for job in jobs %}
-    <a href="{% url 'job_detail' job.id %}">
+    <a href="{% url 'job_detail' job.slug %}">
       <div class="box">
         <div class="columns is-mobile">
           <div class="column is-narrow">

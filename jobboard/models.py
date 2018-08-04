@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class BaseModel(models.Model):
@@ -16,7 +17,7 @@ def from_now_30_days():
 
 class Job(BaseModel):
     title = models.CharField(max_length=50)
-    slug = models.SlugField(default='')
+    slug = models.SlugField(unique=True)
     date_posted = models.DateTimeField(auto_now_add=True, editable=True)
     description = models.TextField()
     employment_type = models.ManyToManyField('EmploymentType')
@@ -37,6 +38,10 @@ class Job(BaseModel):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title + ' at ' + self.employer.title)
+        super(Job, self).save(*args, **kwargs)
+
 
 class EmploymentType(BaseModel):
     title = models.CharField(max_length=50)
@@ -45,6 +50,10 @@ class EmploymentType(BaseModel):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(EmploymentType, self).save(*args, **kwargs)
 
 
 class Employer(BaseModel):
