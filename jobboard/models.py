@@ -16,6 +16,7 @@ def from_now_30_days():
 
 class Job(BaseModel):
     title = models.CharField(max_length=50)
+    slug = models.SlugField(default='')
     date_posted = models.DateTimeField(auto_now_add=True, editable=True)
     description = models.TextField()
     employment_type = models.ManyToManyField('EmploymentType')
