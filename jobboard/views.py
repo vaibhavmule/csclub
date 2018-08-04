@@ -4,7 +4,7 @@ from jobboard.models import Job
 
 
 def jobs(request):
-    jobs = Job.objects.all()
+    jobs = Job.objects.all().order_by('-date_posted')
     return render(request, 'jobs.html', {'jobs': jobs})
 
 
