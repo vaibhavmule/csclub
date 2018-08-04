@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}{{job.title}} at {{job.employer.title}}{% endblock %}
+{% block title %}{{job.title}} 
+at {{job.employer.title}}{% endblock %}
 {% block content %}
 <section class="hero is-light">
   <div class="hero-body">
@@ -16,9 +17,9 @@
   <div class="columns">
     <div class="column">
       <div class="box">
-                      <figure class="image is-64x64 ">
+<!--                       <figure class="image is-64x64 ">
  <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
-</figure>
+</figure> -->
 {{job.employer.title}}
 <a href="{{job.employer.website}}">Website</a>
     <p><strong>Location:</strong>
