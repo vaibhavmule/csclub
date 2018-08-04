@@ -84,7 +84,6 @@ def is_latest_file():
             '%a, %d %b %Y %X %Z',
         ).astimezone(pytz.timezone('GMT')))
     is_latest = True
-    print(headers)
     if latest:
         etag = latest.etag == job_log.etag
         content_length = latest.content_length == job_log.content_length
@@ -92,7 +91,7 @@ def is_latest_file():
         if etag and content_length and last_modified:
             is_latest = False
 
-    return is_latest
+    return is_latest, job_log
 
 
 def add_cs_trainee_job(row):
@@ -149,13 +148,16 @@ class Command(BaseCommand):
     help = 'Add jobs from ICSI'
 
     def handle(self, *args, **options):
-        # if is_latest_file():
-        if True:
+        is_latest, job_log = is_latest_file()
+        if is_latest:
             file_path = download_file()
             wb = openpyxl.load_workbook(file_path)
             sheet = wb.active
             mx_row = max_row(sheet)
+            iter_rows = sheet.iter_rows(min_row=3, max_col=8, max_row=mx_row)
             if mx_row > 2:
-                for row in sheet.iter_rows(min_row=3, max_col=8, max_row=mx_row):
+                for row in iter_rows:
                     add_cs_trainee_job(tuple(row))
+            job_log.is_downloaded = True
+            job_log.save()
         self.stdout.write(self.style.SUCCESS('ok'))
