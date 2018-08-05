@@ -60,7 +60,7 @@ class Employer(BaseModel):
     title = models.CharField(max_length=150)
     website = models.URLField(null=True, blank=True)
     logo = models.ImageField(
-        upload_to='logo/', default='default.jpg')
+        upload_to='logo/', default='/logo/default.jpg')
 
     def __str__(self):
         return self.title
