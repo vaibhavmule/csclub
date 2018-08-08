@@ -19,5 +19,5 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.author.username + ' ' + self.title)
+        self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
