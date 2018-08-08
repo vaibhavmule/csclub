@@ -33,9 +33,7 @@
                       {{post.title}} <span class="tag is-primary">Draft</span>
                     </a>
                   {% else %}
-                    <a href="{% url 'post_detail' post.author.username post.slug %}">
-                      {{post.title}} <span class="tag is-primary">Draft</span>
-                    </a>
+                    <a href="{% url 'post_detail' post.author.username post.slug %}">{{post.title}}</a>
                   {% endif %}
                 </p>
                 <p class="subtitle is-6">by <a href="/{{post.author.username}}">{{post.author.username}}</a></p>
