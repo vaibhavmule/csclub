@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'jobboard',
+    'blog',
+    'bulma',
+    'ckeditor',
 ]
 
 SITE_ID = 1
