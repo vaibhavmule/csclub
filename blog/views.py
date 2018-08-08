@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from blog.models import Post
 from blog.forms import PostForm
@@ -22,6 +23,7 @@ def post_by_user(request, username):
     return render(request, 'blog_posts_by_user.html', {'posts': posts})
 
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -37,6 +39,7 @@ def post_edit(request, pk):
     return render(request, 'post_edit.html', {'form': form})
 
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
