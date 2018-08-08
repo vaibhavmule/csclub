@@ -11,6 +11,17 @@ def post(request):
     return render(request, 'blog_posts.html', {'posts': posts})
 
 
+def post_by_user(request, username):
+    if request.user.username == username:
+        posts = Post.objects.filter(
+            author__username=username).order_by('published_date')
+    else:
+        posts = Post.objects.filter(
+            author__username=username,
+            published_date__isnull=False).order_by('published_date')
+    return render(request, 'blog_posts_by_user.html', {'posts': posts})
+
+
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":

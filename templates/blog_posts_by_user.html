@@ -6,8 +6,8 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title">Blog</h1>
-          <p class="subtitle">Stay updated about Company Secretary</p>
+          <h1 class="title">@VaibhavMule</h1>
+          <p class="subtitle">Creator of <a href="/">CSClub</a></p>
         </div>
         <div class="column is-narrow is-2">
           <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
@@ -27,7 +27,17 @@
           <div class="card-content">  
             <div class="media">
               <div class="media-content">
-                <p class="title is-4"><a href="{% url 'post_detail' post.author.username post.slug %}">{{post.title}}</a></p>
+                <p class="title is-4">
+                  {% if post.published_date is null %}
+                    <a href="{% url 'post_edit' post.pk %}">
+                      {{post.title}} <span class="tag is-primary">Draft</span>
+                    </a>
+                  {% else %}
+                    <a href="{% url 'post_detail' post.author.username post.slug %}">
+                      {{post.title}} <span class="tag is-primary">Draft</span>
+                    </a>
+                  {% endif %}
+                </p>
                 <p class="subtitle is-6">by <a href="/{{post.author.username}}">{{post.author.username}}</a></p>
               </div>
             </div>
