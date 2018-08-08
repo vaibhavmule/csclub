@@ -2,8 +2,10 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils import timezone
 
+from csclub.models import BaseModel
 
-class Post(models.Model):
+
+class Post(BaseModel):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField()
