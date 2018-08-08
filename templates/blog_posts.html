@@ -4,8 +4,17 @@
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title">Blog</h1>
-      <p class="subtitle">Stay updated about Company Secretary</p>
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Blog</h1>
+          <p class="subtitle">Stay updated about Company Secretary</p>
+        </div>
+        <div class="column is-narrow">
+          <a class="button is-primary is-medium is-outlined is-inverted" href="{% url 'post_new' %}">
+              Write
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -17,13 +26,8 @@
         <div class="card">
           <div class="card-content">  
             <div class="media">
-<!--               <div class="media-left">
-                <figure class="image is-48x48">
-                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                </figure>
-              </div> -->
               <div class="media-content">
-                <p class="title is-4"><a href="{% url 'post_detail' post.slug %}">{{post.title}}</a></p>
+                <p class="title is-4"><a href="{% url 'post_detail' post.author.username post.slug %}">{{post.title}}</a></p>
                 <p class="subtitle is-6">by <a href="/{{post.author.username}}">{{post.author.username}}</a></p>
               </div>
             </div>
@@ -34,20 +38,9 @@
       <div class="column is-4">
         <div class="box">
           <p class="title is-5">Subscribe to our newsletter</p>
-      </div>
-  </div>
-</div>
-
-
-    
+        </div>
       </div>
     </div>
   </div>
-</div>
-        
-      </a>
-
-</div>
-    </div>
-  </section>
+</section>
 {% endblock %}
