@@ -88,7 +88,7 @@ def is_latest_file():
         etag = latest.etag == job_log.etag
         content_length = latest.content_length == job_log.content_length
         last_modified = latest.last_modified == job_log.last_modified
-        if etag and content_length and last_modified:
+        if etag and content_length and last_modified and latest.is_downloaded:
             is_latest = False
 
     return is_latest, job_log
@@ -129,6 +129,7 @@ def add_cs_trainee_job(row):
             employer=employer,
             location=row[6].value)
         job.employment_type.add(EmploymentType.objects.get(value='INTERN'))
+        job.save()
 
     else:
         print('----------------------------------------\n')
