@@ -52,6 +52,7 @@ class EmploymentType(BaseModel):
 
 class Employer(BaseModel):
     title = models.CharField(max_length=150)
+    slug = models.SlugField(unique=True)
     website = models.URLField(null=True, blank=True)
     logo = models.ImageField(
         upload_to='logo/', default='/logo/default.jpg')
@@ -61,6 +62,10 @@ class Employer(BaseModel):
 
     class Meta:
         unique_together = ("title", "website")
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Job, self).save(*args, **kwargs)
 
 
 class AddJobLog(BaseModel):
