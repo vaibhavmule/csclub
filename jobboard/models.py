@@ -65,7 +65,7 @@ class Employer(BaseModel):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Job, self).save(*args, **kwargs)
+        super(Employer, self).save(*args, **kwargs)
 
 
 class AddJobLog(BaseModel):
