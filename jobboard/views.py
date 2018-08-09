@@ -16,4 +16,9 @@ def job_detail(request, slug):
 def jobs_by_employer(request, slug):
     employer = get_object_or_404(Employer, slug=slug)
     jobs = Job.objects.filter(employer=employer).order_by('-date_posted')
-    return render(request, 'jobs.html', {'jobs': jobs})
+    return render(request, 'jobs.html', {'jobs': jobs, 'employer': employer})
+
+
+def companies(request):
+    companies = Employer.objects.all()
+    return render(request, 'companies.html', {'companies': companies})

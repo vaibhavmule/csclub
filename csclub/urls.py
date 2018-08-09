@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from blog.views import post_detail, post_by_user
+from jobboard.views import jobs_by_employer, companies
 from page.views import signup
 
 urlpatterns = [
@@ -11,6 +12,8 @@ urlpatterns = [
     path('', include('page.urls')),
     path('job/', include('jobboard.urls')),
     path('blog/', include('blog.urls')),
+    path('companies/', companies, name='companies'),
+    path('companies/<slug:slug>/', jobs_by_employer, name='jobs_by_employer'),
     path('<username>/<slug:slug>/', post_detail, name='post_detail'),
     path('<username>/', post_by_user, name='post_by_user'),
 ]

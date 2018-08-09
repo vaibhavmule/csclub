@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Jobs{% endblock %}
+{% block content %}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Companies</h1>
+        </div>
+        <div class="column is-narrow is-4 has-text-centered">
+          <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
+            Post a Job for &nbsp<s>₹699</s>&nbsp FREE
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        {% for company in companies %}
+        <div class="card">
+          <div class="card-content">  
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="{{company.logo.url}}" alt="{{company.title}}">
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">
+                  <a href="{% url 'jobs_by_employer' company.slug %}">{{company.title}}</a>
+                </p>
+                <p class="subtitle is-6"><a href="{{company.wesbite}}">Website</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <p class="title is-5">Subscribe to our newsletter</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
