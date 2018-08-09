@@ -38,7 +38,7 @@ class Job(BaseModel):
 
 
 class EmploymentType(BaseModel):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     value = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
 
