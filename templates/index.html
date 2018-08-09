@@ -1,10 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Job board for CS Trainee Vacancy and CS Jobs{% endblock %}
+{% block title %}Jobs{% endblock %}
+{% block head %}<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script> {% endblock %}
 {% block content %}
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-4">CS Trainee Vacancies and CS Jobs</h2>
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Jobs</h1>
+          <p class="subtitle">CS Trainee Vacancies and CS Jobs</p>
+        </div>
+        <div class="column is-narrow is-4 has-text-centered">
+          <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
+              Post a Job for &nbsp<s>₹699</s>&nbsp FREE
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -19,9 +30,9 @@
       <div class="box">
         <div class="columns is-mobile">
           <div class="column is-narrow">
-            <figure class="image is-64x64 ">
-              <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
-            </figure>
+              <figure class="image is-64x64 ">
+ <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
+</figure>
               
           </div>
           <div class="column">
@@ -32,15 +43,20 @@
               {% endfor %}
 <br/>
 <br/>
-<h2 class=" has-text-grey"><small>
+<h2 class="subtitle has-text-grey"><small>
 
                 <span class="icon is-small">
                 <i class="fas fa-briefcase"></i>
-                </span>&nbsp;{{job.employer.title}}
-                  <br class="is-hidden-desktop">
+                </span>
+                  &nbsp;{{job.employer.title}}
+
+
+                  <br/>
                               <span class="icon is-small">
                 <i class="fas fa-map-marker"></i>
-              </span>&nbsp;{{job.location}}</small></h2>
+              
+              </span>
+                   &nbsp;{{job.location}}</small></h2>
             <p><h2 class="title is-6"></h2>
 
 

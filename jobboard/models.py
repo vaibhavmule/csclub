@@ -2,13 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 
-
-class BaseModel(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
+from csclub.models import BaseModel
 
 
 def from_now_30_days():

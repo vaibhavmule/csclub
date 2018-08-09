@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [ 'localhost', 'beta.csclub.co', '167.99.173.188']
 
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'jobboard',
+    'blog',
+    'bulma',
+    'ckeditor',
 ]
 
 SITE_ID = 1

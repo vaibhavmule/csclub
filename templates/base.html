@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}- CSClub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    {% block head %}{% endblock %}
   </head>
   <body>
     <nav class="navbar is-transparent">
@@ -33,30 +33,24 @@
       </a>
     </div>
 
-<!--     <div class="navbar-end">
+    <div class="navbar-end">
       <div class="navbar-item">
         <div class="field is-grouped">
           <p class="control">
-            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
-              <span class="icon">
-                <i class="fab fa-twitter"></i>
-              </span>
+            <a class="bd-tw-button button" href="/accounts/login/">
               <span>
-                Tweet
+                Login
               </span>
             </a>
           </p>
           <p class="control">
-            <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip">
-              <span class="icon">
-                <i class="fas fa-download"></i>
-              </span>
-              <span>Download</span>
+            <a class="button is-primary" href="/accounts/singup/">
+              <span>SingUp</span>
             </a>
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
     </div>
   </div>
 </nav>

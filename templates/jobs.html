@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Jobs{% endblock %}
+{% block head %}<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script> {% endblock %}
 {% block content %}
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-4">CS Trainee Vacancies and CS Jobs</h2>
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Jobs</h1>
+          <p class="subtitle">CS Trainee Vacancies and CS Jobs</p>
+        </div>
+        <div class="column is-narrow is-4 has-text-centered">
+          <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
+              Post a Job for &nbsp<s>₹699</s>&nbsp FREE
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
