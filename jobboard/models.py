@@ -33,7 +33,7 @@ class Job(BaseModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title + ' at ' + self.employer.title)
+        self.slug = slugify(self.title + ' ' + str(self.id))
         super(Job, self).save(*args, **kwargs)
 
 
