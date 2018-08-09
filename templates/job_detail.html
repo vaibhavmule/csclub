@@ -20,7 +20,8 @@ at {{job.employer.title}}{% endblock %}
 <!--                       <figure class="image is-64x64 ">
  <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
 </figure> -->
-{{job.employer.title}}
+<a href="{% url 'jobs_by_employer' job.employer.slug %}">{{job.employer.title}}</a>
+
 <a href="{{job.employer.website}}">Website</a>
     <p><strong>Location:</strong>
     {{job.location}}</p>
