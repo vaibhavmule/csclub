@@ -25,7 +25,7 @@ SECRET_KEY = '*d-v!q=12d&7e8l_39dyb*)@9g4&dv8kh038*a1#n*yx8_70lr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost', 'beta.csclub.co', '167.99.173.188']
+ALLOWED_HOSTS = ['localhost', 'beta.csclub.co', '167.99.173.188']
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -83,13 +83,6 @@ WSGI_APPLICATION = 'csclub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -140,12 +133,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [
+# STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, 'static'),
-#]
+# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 
 MEDIA_URL = '/static/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,"static/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
