@@ -21,7 +21,9 @@ def post_by_user(request, username):
         posts = Post.objects.filter(
             author__username=author,
             published_date__isnull=False).order_by('published_date')
-    return render(request, 'blog_posts_by_user.html', {'posts': posts})
+    return render(request,
+                  'blog_posts_by_user.html',
+                  {'posts': posts, 'author': author})
 
 
 @login_required
