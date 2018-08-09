@@ -82,7 +82,7 @@ def is_latest_file():
         last_modified=datetime.strptime(
             headers['Last-Modified'],
             '%a, %d %b %Y %X %Z',
-        ).astimezone(pytz.timezone('GMT')))
+        ))
     is_latest = True
     if latest:
         etag = latest.etag == job_log.etag
