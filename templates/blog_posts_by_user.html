@@ -6,12 +6,12 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title">@VaibhavMule</h1>
-          <p class="subtitle">Creator of <a href="/">CSClub</a></p>
+          <h1 class="title">@{{author.username}}</h1>
+          <p class="subtitle">{{bio}}</p>
         </div>
-        <div class="column is-narrow is-2">
+        <div class="column is-narrow is-4 has-text-centered">
           <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
-              Write
+            Write a article
           </a>
         </div>
       </div>
