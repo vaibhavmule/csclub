@@ -52,7 +52,7 @@ class EmploymentType(BaseModel):
 
 class Employer(BaseModel):
     title = models.CharField(max_length=150)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=150)
     website = models.URLField(null=True, blank=True)
     logo = models.ImageField(
         upload_to='logo/', default='/logo/default.jpg')
