@@ -53,7 +53,7 @@ class Job(BaseModel):
             'employmentType': list(
                 self.employment_type.values_list('value', flat=True)),
             'jobLocation': {'@type': 'Place', 'address': 'Mumbai'},
-            'hiringOrgnization': self.employer.json_ld()
+            'hiringOrganization': self.employer.json_ld()
         })
 
 
