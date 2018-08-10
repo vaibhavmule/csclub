@@ -65,7 +65,7 @@ class Job(BaseModel):
                     'unitText': self.get_salary_unit_display()
                 }
             },
-            'identified': {
+            'identifier': {
                 '@type': 'PropertyValue',
                 'name': self.employer.title,
                 "value": 'http://{}{}'.format(
