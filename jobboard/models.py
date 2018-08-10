@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -35,6 +36,9 @@ class Job(BaseModel):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + ' ' + str(self.id))
         super(Job, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('job_detail', kwargs={'slug': self.slug})
 
 
 class EmploymentType(BaseModel):

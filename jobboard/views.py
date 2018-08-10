@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
+from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from jobboard.models import Job, Employer
@@ -42,3 +43,11 @@ class LatestJobsFeed(Feed):
 
     def item_link(self, item):
         return reverse('job_detail', args=[item.slug])
+
+
+class JobSitemap(Sitemap):
+    def items(self):
+        return Job.objects.all().order_by('-date_posted')
+
+    def lastmod(self, obj):
+        return obj.date_posted

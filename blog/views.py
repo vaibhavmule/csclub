@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.syndication.views import Feed
+from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 from blog.models import Post
@@ -81,3 +82,12 @@ class LatestArtcileFeed(Feed):
 
     def item_link(self, item):
         return reverse('post_detail', args=[item.author.username, item.slug])
+
+
+class BlogSitemap(Sitemap):
+    def items(self):
+        return Post.objects.filter(
+            published_date__isnull=False).order_by('-published_date')
+
+    def lastmod(self, obj):
+        return obj.published_date
