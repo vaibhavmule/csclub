@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -40,6 +42,20 @@ class Job(BaseModel):
     def get_absolute_url(self):
         return reverse('job_detail', kwargs={'slug': self.slug})
 
+    def json_ld(self):
+        return json.dumps({
+            '@context': 'http://schema.org/',
+            '@type': "JobPosting",
+            'datePosted': self.date_posted.isoformat(),
+            'title': self.title,
+            'description': self.description,
+            'validThrough': self.expiry_date.isoformat(),
+            'employmentType': list(
+                self.employment_type.values_list('value', flat=True)),
+            'jobLocation': {'@type': 'Place', 'address': 'Mumbai'},
+            'hiringOrgnization': self.employer.json_ld()
+        })
+
 
 class EmploymentType(BaseModel):
     title = models.CharField(max_length=100)
@@ -70,6 +86,15 @@ class Employer(BaseModel):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Employer, self).save(*args, **kwargs)
+
+    def json_ld(self):
+        return {
+            '@type': 'Organization',
+            'name': self.title,
+            "sameAs": self.website,
+            "url": self.website,
+            "logo": self.logo.url,
+        }
 
 
 class AddJobLog(BaseModel):
