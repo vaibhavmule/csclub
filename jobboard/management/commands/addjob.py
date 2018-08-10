@@ -123,14 +123,17 @@ def add_cs_trainee_job(row):
             employer = Employer.objects.get(title=row[1].value)
         else:
             employer = Employer.objects.create(title=row[1].value)
-        job = Job.objects.create(
+        job = Job(
             title="CS Trainee",
             description=row[5].value,
             employer=employer,
             location=row[6].value)
-        job.employment_type.add(EmploymentType.objects.get(value='INTERN'))
+        employment_type, created = EmploymentType.objects.get_or_create(
+            title='Internship',
+            value='INTERN',
+        )
         job.save()
-
+        job.employment_type.add(employment_type)
     else:
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
