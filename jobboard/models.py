@@ -1,9 +1,11 @@
 import json
 
+from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+
 
 from csclub.models import BaseModel
 
@@ -53,7 +55,23 @@ class Job(BaseModel):
             'employmentType': list(
                 self.employment_type.values_list('value', flat=True)),
             'jobLocation': {'@type': 'Place', 'address': 'Mumbai'},
-            'hiringOrganization': self.employer.json_ld()
+            'hiringOrganization': self.employer.json_ld(),
+            'baseSalary': {
+                '@type': 'MonetaryAmount',
+                'currency': 'INR',
+                'value': {
+                    '@type': 'QuantitativeValue',
+                    'value': str(self.salary),
+                    'unitText': self.get_salary_unit_display()
+                }
+            },
+            'identified': {
+                '@type': 'PropertyValue',
+                'name': self.employer.title,
+                "value": 'http://{}{}'.format(
+                    Site.objects.get_current().domain,
+                    self.get_absolute_url())
+            },
         })
 
 
