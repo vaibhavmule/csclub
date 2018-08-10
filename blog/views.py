@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.syndication.views import Feed
+from django.urls import reverse
 
 from blog.models import Post
 from blog.forms import PostForm
@@ -61,3 +62,22 @@ def post_detail(request, username, slug):
     author = get_object_or_404(User, username=username)
     post = Post.objects.get(slug=slug, author=author)
     return render(request, 'post_detail.html', {'post': post})
+
+
+class LatestArtcileFeed(Feed):
+    title = "CSClub Blog"
+    link = "/blog/"
+    description = "Stay updated about Company Secretary"
+
+    def items(self):
+        return Post.objects.filter(
+            published_date__isnull=False).order_by('-published_date')[:5]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.text
+
+    def item_link(self, item):
+        return reverse('post_detail', args=[item.author.username, item.slug])
