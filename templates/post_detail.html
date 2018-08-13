@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Jobs{% endblock %}
+{% block head %}
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b71661104b9a500117b0f8b&product=sop' async='async'></script>
+{% endblock %}
 {% block content %}
 <section class="hero is-primary">
   <div class="hero-body">
@@ -35,6 +38,8 @@
         <div class="content">
           {{post.text|safe}}
         </div>
+        <p>Share this job:</p>
+        <div class="sharethis-inline-share-buttons"></div>
       </div>
       <div class="column is-4">
         <div class="box">

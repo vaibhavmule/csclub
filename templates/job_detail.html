@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 {% block title %}{{job.title}} 
 at {{job.employer.title}}{% endblock %}
-{% block head %}<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script> {% endblock %}
+{% block head %}
+<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b71661104b9a500117b0f8b&product=sop' async='async'></script>
+{% endblock %}
 {% block content %}
 <section class="hero is-light">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-4">{{job.title}}
-                              {% for employment_type in job.employment_type.all %}
-              <span class="tag is-link">{{employment_type.title}}</span>
-              {% endfor %}</h2>
+      <h2 class="title is-4">
+        {{job.title}}
+        {% for employment_type in job.employment_type.all %}
+          <span class="tag is-link">{{employment_type.title}}</span>
+        {% endfor %}</h2>
     </div>
   </div>
 </section>
@@ -22,18 +26,22 @@ at {{job.employer.title}}{% endblock %}
  <img src="{{ job.employer.logo.url }}" alt="{{ job.title }} at {{job.location}}" >
 </figure> -->
 <p>
-  <strong>Company:</strong><a href="{% url 'jobs_by_employer' job.employer.slug %}">{{job.employer.title}}</a>
+  <strong>Company: </strong><a href="{% url 'jobs_by_employer' job.employer.slug %}">{{job.employer.title}}</a>
 </p>
 
-
-<a href="{{job.employer.website}}">Website</a>
+{% if job.employer.website %}
   <p>
-    <strong>Location:</strong>{{job.location}}
+    <strong>Company Website: </strong> <a href="{{job.employer.website}}">Website</a>
+  </p>
+
+{% endif %}
+  <p>
+    <strong>Location: </strong>{{job.location}}
   </p>
   
   {% if salary %}
   <p>
-    <strong>Salary:</strong> INR {{job.salary}}
+    <strong>Salary: </strong> INR {{job.salary}}
   </p>
   {% endif %}
   <div class="content">
@@ -69,14 +77,18 @@ at {{job.employer.title}}{% endblock %}
       <p><strong>Incentives:</strong></p>
         <ul><li>Performance-based annual bonus plan, project-completion bonuses</li>
       </ul> -->
-  <p><strong>Expiration date:</strong> {{job.expiry_date|date:"d-m-Y"}}</p>
-  <p><strong>Date Posted:</strong> {{job.date_posted|date:"d-m-Y"}}</p>
+  <p><strong>Expiration date: </strong> {{job.expiry_date|date:"d-m-Y"}}</p>
+  <p><strong>Date Posted: </strong> {{job.date_posted|date:"d-m-Y"}}</p>
   <br>
   {% if job.apply_email %}
   <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
   {% else %}
   <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_link}}">Apply</a>
   {% endif %}
+  <br>
+ <p>Share this job:</p>
+ <div class="sharethis-inline-share-buttons"></div>
+
 </div>
     </div>
       <div class="column is-4">
