@@ -7,60 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}- CSClub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-9064508961850811",
+              enable_page_level_ads: true
+         });
+    </script>
     {% block head %}{% endblock %}
   </head>
   <body>
     <nav class="navbar is-transparent">
       <div class="container">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="{% static 'csclub-dark.png' %}" alt="CSClub Job Board">
-    </a>
-    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="{% static 'csclub-dark.png' %}" alt="CSClub Job Board">
+          </a>
+          <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
 
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="/job/">
-        Jobs
-      </a>
-      <a class="navbar-item" href="/companies/">
-        Companies
-      </a>
-      <a class="navbar-item" href="/blog/">
-        Blog
-      </a>
-    </div>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/job/">
+              Jobs
+            </a>
+            <a class="navbar-item" href="/companies/">
+              Companies
+            </a>
+            <a class="navbar-item" href="/blog/">
+              Blog
+            </a>
+          </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control">
-            <a class="bd-tw-button button" href="/accounts/login/">
-              <span>
-                Login
-              </span>
-            </a>
-          </p>
-          <p class="control">
-            <a class="button is-primary" href="/accounts/singup/">
-              <span>SingUp</span>
-            </a>
-          </p>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <a class="bd-tw-button button" href="/accounts/login/">
+                    <span>
+                      Login
+                    </span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-primary" href="/accounts/singup/">
+                    <span>SingUp</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
-  </div>
-</nav>
-  
-      {% block content %}
-      {% endblock %}
-
+    </nav>  
+    {% block content %}
+    {% endblock %}
   </body>
   <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', () => {
