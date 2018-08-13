@@ -23,7 +23,8 @@ class Job(BaseModel):
     employer = models.ForeignKey('Employer', on_delete=models.PROTECT)
     location = models.CharField(max_length=150)
     expiry_date = models.DateTimeField(default=from_now_30_days)
-    salary = models.DecimalField(max_digits=7, decimal_places=2, default=0.00)
+    salary = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
     UNIT_CHOICES = (
         ('M', 'Month'),
         ('Y', 'Year'),
@@ -38,8 +39,10 @@ class Job(BaseModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title + ' ' + str(self.id))
         super(Job, self).save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(self.title + ' ' + str(self.id))
+            super(Job, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('job_detail', kwargs={'slug': self.slug})
@@ -61,7 +64,7 @@ class Job(BaseModel):
                 'currency': 'INR',
                 'value': {
                     '@type': 'QuantitativeValue',
-                    'value': str(self.salary),
+                    'value': self.salary,
                     'unitText': self.get_salary_unit_display()
                 }
             },
