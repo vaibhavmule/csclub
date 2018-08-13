@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{job.title}} 
 at {{job.employer.title}}{% endblock %}
-{% block head %}
-    <script type="application/ld+json">
-    {{job.json_ld|safe}}
-    </script>
-{% endblock %}
 {% block content %}
 <section class="hero is-light">
   <div class="hero-body">
@@ -79,4 +74,7 @@ at {{job.employer.title}}{% endblock %}
   </div>
   </div>
 </section>
+<script type="application/ld+json">
+{{job.json_ld|safe}}
+</script>
 {% endblock %}
