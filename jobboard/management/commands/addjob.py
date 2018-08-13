@@ -2,7 +2,7 @@ import requests
 import pytz
 import openpyxl
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 from django.core.management.base import BaseCommand
 from jobboard.models import Job, Employer, EmploymentType, AddJobLog
@@ -50,7 +50,7 @@ def str_to_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=2)
+    now = datetime.now() - timedelta(days=31)
     for col in h_column[2:20]:
         d = col.value
 
@@ -76,21 +76,26 @@ def is_latest_file():
     if AddJobLog.objects.count():
         latest = AddJobLog.objects.latest('created')
 
-    job_log = AddJobLog.objects.create(
+    job_log = AddJobLog(
         etag=headers['ETag'].replace('"', ''),
         content_length=int(headers['Content-Length']),
         last_modified=datetime.strptime(
             headers['Last-Modified'],
             '%a, %d %b %Y %X %Z',
-        ))
+        ).astimezone(pytz.timezone('Asia/Kolkata')))
+    job_log.save()
     is_latest = True
     if latest:
         etag = latest.etag == job_log.etag
         content_length = latest.content_length == job_log.content_length
         last_modified = latest.last_modified == job_log.last_modified
-        if etag and content_length and last_modified and latest.is_downloaded:
+        is_downloaded = AddJobLog.objects.filter(
+            etag=job_log.etag,
+            content_length=job_log.content_length,
+            last_modified=job_log.last_modified,
+            is_downloaded=True).exists()
+        if etag and content_length and last_modified and is_downloaded:
             is_latest = False
-
     return is_latest, job_log
 
 
@@ -117,7 +122,9 @@ def add_cs_trainee_job(row):
             row[6].value,
             row[3].value,
             row[4].value,
-            row[7].value.strftime('%m/%d/%Y')))
+            d.strftime('%m/%d/%Y')))
+        date_posted = datetime.combine(
+            d, datetime.now().time())
         employer = None
         if Employer.objects.filter(title=row[1].value).exists():
             employer = Employer.objects.get(title=row[1].value)
@@ -127,7 +134,8 @@ def add_cs_trainee_job(row):
             title="CS Trainee",
             description=row[5].value,
             employer=employer,
-            location=row[6].value)
+            location=row[6].value,
+            date_posted=date_posted)
         employment_type, created = EmploymentType.objects.get_or_create(
             title='Internship',
             value='INTERN',

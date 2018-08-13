@@ -17,7 +17,7 @@ def from_now_30_days():
 class Job(BaseModel):
     title = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)
-    date_posted = models.DateTimeField(auto_now_add=True, editable=True)
+    date_posted = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     employment_type = models.ManyToManyField('EmploymentType')
     employer = models.ForeignKey('Employer', on_delete=models.PROTECT)
@@ -64,7 +64,7 @@ class Job(BaseModel):
                 'currency': 'INR',
                 'value': {
                     '@type': 'QuantitativeValue',
-                    'value': self.salary,
+                    'value': str(self.salary) if self.salary else self.salary,
                     'unitText': self.get_salary_unit_display()
                 }
             },
