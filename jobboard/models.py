@@ -34,6 +34,8 @@ class Job(BaseModel):
         choices=UNIT_CHOICES,
         default='M',
     )
+    apply_link = models.URLField(null=True, blank=True)
+    apply_email = models.EmailField(null=True, blank=True)
 
     def __str__(self):
         return self.title

@@ -2,7 +2,7 @@ import requests
 import pytz
 import openpyxl
 
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand
 from jobboard.models import Job, Employer, EmploymentType, AddJobLog
@@ -115,14 +115,11 @@ def add_cs_trainee_job(row):
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
             row[1].value, row[6].value),)
-        print("<strong>Company Name:</strong> {} <br/><strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Location:</strong> {} <br/><strong>Email:</strong> {} <br/><strong>Contact Person:</strong> {} <br/><br/> <strong>Source:</strong> {} at <a href='https://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'>ICSI</a>".format(
-            row[1].value,
+        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Contact Person:</strong> {}".format(
             row[5].value,
             row[2].value,
-            row[6].value,
-            row[3].value,
-            row[4].value,
-            d.strftime('%m/%d/%Y')))
+            row[4].value)
+        print(html)
         date_posted = datetime.combine(
             d, datetime.now().time())
         employer = None
@@ -132,10 +129,11 @@ def add_cs_trainee_job(row):
             employer = Employer.objects.create(title=row[1].value)
         job = Job(
             title="CS Trainee",
-            description=row[5].value,
+            description=html,
             employer=employer,
             location=row[6].value,
-            date_posted=date_posted)
+            date_posted=date_posted,
+            apply_email=row[3].value)
         employment_type, created = EmploymentType.objects.get_or_create(
             title='Internship',
             value='INTERN',
