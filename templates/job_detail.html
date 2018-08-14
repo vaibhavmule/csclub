@@ -2,6 +2,14 @@
 {% block title %}{{job.title}} 
 at {{job.employer.title}}{% endblock %}
 {% block description %}Apply now for {{job.title}} 
+at {{job.employer.title}} in {{job.location}}{% endblock%}
+{% block og_title %}{{job.title}} 
+at {{job.employer.title}}{% endblock %}
+{% block og_description %}Apply now for {{job.title}} 
+at {{job.employer.title}} in {{job.location}}{% endblock%} 
+{% block twitter_title %}{{job.title}} 
+at {{job.employer.title}}{% endblock %}
+{% block twitter_description %}Apply now for {{job.title}} 
 at {{job.employer.title}} in {{job.location}}{% endblock%} 
 {% block head %}
 <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>

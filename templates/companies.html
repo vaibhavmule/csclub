@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block title %}{{companies.count}} Companies listed at{% endblock %}
 {% block description %}{{companies.count}} Companies listed at CSClub{% endblock%}
-
+{% block og_title %}{{companies.count}} Companies listed at{% endblock %}
+{% block og_description %}{{companies.count}} Companies listed at CSClub{% endblock%}
+{% block twitter_title %}{{companies.count}} Companies listed at{% endblock %}
+{% block twitter_description %}{{companies.count}} Companies listed at CSClub{% endblock%}
 {% block content %}
 <section class="hero is-primary">
   <div class="hero-body">

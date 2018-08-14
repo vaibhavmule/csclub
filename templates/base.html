@@ -8,6 +8,18 @@
     <title>{% block title %}{% endblock %}- CSClub</title>
     <meta name="description" content="{% block description %}CSClub is job board for CS trainees and CS professionals.
 {% endblock %}">
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% block og_title %}{% endblock%}- CSClub" />
+    <meta property="og:description" content="{% block og_description %}{% endblock%}" />
+    <meta property="og:url" content="https://csclub.co/" />
+    <meta property="og:site_name" content="CSClub" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="{% block twitter_description %}{% endblock%}" />
+    <meta name="twitter:title" content="{% block twitter_title %}{% endblock%}- CSClub" />
+    <meta name="twitter:site" content="@csclubco" />
+    <meta name="twitter:creator" content="@vaibhavmule" />
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -44,6 +56,9 @@
             </a>
             <a class="navbar-item" href="/blog/">
               Blog
+            </a>
+            <a class="navbar-item" href="/contact/">
+              Contact
             </a>
           </div>
 
