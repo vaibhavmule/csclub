@@ -18,6 +18,10 @@ def privacy(request):
     return render(request, 'privacy.html', {})
 
 
+def contact(request):
+    return render(request, 'contact.html', {})
+
+
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
