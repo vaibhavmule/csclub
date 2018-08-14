@@ -35,3 +35,11 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def home_files(request, filename):
+    return render(request, filename, {}, content_type="text/plain")
+
+
+def handler404(request):
+    render(request, '404.html', status=404)
