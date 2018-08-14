@@ -12,7 +12,7 @@
             <a href="{% url 'post_detail' post.author.username post.slug %}">{{post.title}}</a>
           </h1>
           <p class="subtitle">
-            by <a href="/{{post.author.username}}">{{post.author.username}}</a>
+            by <a href="{% url 'post_by_user' post.author.username %}">{{post.author.username}}</a>
           </p>
         </div>
         <div class="column is-narrow is-2">

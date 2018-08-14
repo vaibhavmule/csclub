@@ -1,24 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Articles by @{{author.username}}{% endblock %}
-{% block description %}Articles by @{{author.username}}{% endblock%}
-{% block og_title %}Articles by @{{author.username}}{% endblock %}
-{% block og_description %}Articles by @{{author.username}}{% endblock%}
-{% block twitter_title %}Articles by @{{author.username}}{% endblock %}
-{% block twitter_description %}Articles by @{{author.username}}{% endblock%}
+{% block title %}404 - Page not found{% endblock %}
+{% block og_title %}404 - Page not found{% endblock %}
+{% block twitter_title %}404 - Page not found{% endblock %}
 {% block content %}
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title">@{{author.username}}</h1>
-          <p class="subtitle">authored {{posts.count}} articles</p>
+          <h1 class="title">
+            404
+          </h1>
+          <p class="subtitle">
+            Oops! That Page Can’t Be Found.
+          </p>
         </div>
-<!--         <div class="column is-narrow is-4 has-text-centered">
-          <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
-            Write a article
-          </a>
-        </div> -->
       </div>
     </div>
   </div>
@@ -27,26 +23,11 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        {% for post in posts %}
-        <div class="card">
-          <div class="card-content">  
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-4">
-                  {% if post.published_date is null %}
-                    <a href="{% url 'post_edit' post.pk %}" class="has-text-black">
-                      {{post.title}} <span class="tag is-primary">Draft</span>
-                    </a>
-                  {% else %}
-                    <a href="{% url 'post_detail' post.author.username post.slug %}" class="has-text-black">{{post.title}}</a>
-                  {% endif %}
-                </p>
-                <p class="subtitle is-6">by <a href="{% url 'post_by_user' post.author.username %}">{{post.author.username}}</a></p>
-              </div>
-            </div>
-          </div>
+        <div class="content">
+          <a class="button is-link is-medium is-fullwidth" href="https://m.me/csclub.co">
+            Send us messeage for feedback
+          </a>
         </div>
-        {% endfor %}
       </div>
       <div class="column is-4">
         <div class="box">
@@ -80,7 +61,7 @@
       <!--End mc_embed_signup-->
         </div>
                 <div class="box">
-          <p class="title is-5">Follow us:</p>
+          <p class="title id-s">Follow us:</p>
           <div class="sharethis-inline-follow-buttons"></div>
         </div>
       </div>
