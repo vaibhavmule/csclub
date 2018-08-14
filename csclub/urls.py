@@ -4,7 +4,7 @@ from django.urls import include, path
 
 from blog.views import post_detail, post_by_user, BlogSitemap
 from jobboard.views import jobs_by_employer, companies, JobSitemap
-from page.views import signup, handler404
+from page.views import signup
 
 sitemaps = {
     'blog': BlogSitemap,
@@ -26,4 +26,4 @@ urlpatterns = [
     path('@<username>/', post_by_user, name='post_by_user'),
 ]
 
-handler404 = handler404
+handler404 = 'page.views.handler404'

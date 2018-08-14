@@ -11,15 +11,15 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'about.html', {})
+    return render(request, 'about.html')
 
 
 def privacy(request):
-    return render(request, 'privacy.html', {})
+    return render(request, 'privacy.html')
 
 
 def contact(request):
-    return render(request, 'contact.html', {})
+    return render(request, 'contact.html')
 
 
 def signup(request):
