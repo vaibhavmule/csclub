@@ -7,13 +7,13 @@
       <div class="columns">
         <div class="column">
           <h1 class="title">@{{author.username}}</h1>
-          <p class="subtitle">{{bio}}</p>
+          <p class="subtitle">authored {{posts.count}} articles</p>
         </div>
-        <div class="column is-narrow is-4 has-text-centered">
+<!--         <div class="column is-narrow is-4 has-text-centered">
           <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
             Write a article
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -29,11 +29,11 @@
               <div class="media-content">
                 <p class="title is-4">
                   {% if post.published_date is null %}
-                    <a href="{% url 'post_edit' post.pk %}">
+                    <a href="{% url 'post_edit' post.pk %}" class="has-text-black">
                       {{post.title}} <span class="tag is-primary">Draft</span>
                     </a>
                   {% else %}
-                    <a href="{% url 'post_detail' post.author.username post.slug %}">{{post.title}}</a>
+                    <a href="{% url 'post_detail' post.author.username post.slug %}" class="has-text-black">{{post.title}}</a>
                   {% endif %}
                 </p>
                 <p class="subtitle is-6">by <a href="/{{post.author.username}}">{{post.author.username}}</a></p>
