@@ -26,4 +26,4 @@ urlpatterns = [
     path('@<username>/', post_by_user, name='post_by_user'),
 ]
 
-handler404 = 'page.views.handler404'
+handler404 = handler404

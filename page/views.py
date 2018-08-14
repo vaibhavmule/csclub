@@ -42,4 +42,4 @@ def home_files(request, filename):
 
 
 def handler404(request):
-    render(request, '404.html', status=404)
+    return render(request, '404.html', status=404)
