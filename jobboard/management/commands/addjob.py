@@ -71,7 +71,11 @@ def is_latest_file():
     url = 'http://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'
     r = requests.get(url)
     headers = r.headers
-
+    local_tz = pytz.timezone('Asia/Kolkata')
+    lst_mod = local_tz.localize(datetime.strptime(
+        headers['Last-Modified'],
+        '%a, %d %b %Y %X %Z',
+    ))
     latest = None
     if AddJobLog.objects.count():
         latest = AddJobLog.objects.latest('created')
@@ -79,10 +83,7 @@ def is_latest_file():
     job_log = AddJobLog(
         etag=headers['ETag'].replace('"', ''),
         content_length=int(headers['Content-Length']),
-        last_modified=datetime.strptime(
-            headers['Last-Modified'],
-            '%a, %d %b %Y %X %Z',
-        ).astimezone(pytz.timezone('Asia/Kolkata')))
+        last_modified=lst_mod)
     job_log.save()
     is_latest = True
     if latest:
