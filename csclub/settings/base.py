@@ -25,9 +25,6 @@ SECRET_KEY = '*d-v!q=12d&7e8l_39dyb*)@9g4&dv8kh038*a1#n*yx8_70lr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-
 ALLOWED_HOSTS = ['localhost', 'beta.csclub.co', '167.99.173.188']
 
 LOGIN_REDIRECT_URL = '/'
@@ -146,3 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
+
+
+ADMIN_SITE_HEADER = "CSClub"
