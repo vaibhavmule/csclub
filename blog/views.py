@@ -62,7 +62,7 @@ def post_new(request):
 
 def post_detail(request, username, slug):
     author = get_object_or_404(User, username=username)
-    post = Post.objects.get(slug=slug, author=author)
+    post = get_object_or_404(Post, slug=slug, author=author)
     return render(request, 'post_detail.html', {'post': post})
 
 

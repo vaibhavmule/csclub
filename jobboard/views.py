@@ -12,7 +12,7 @@ def jobs(request):
 
 
 def job_detail(request, slug):
-    job = Job.objects.get(slug=slug)
+    job = get_object_or_404(Job, slug=slug)
     return render(request, 'job_detail.html', {'job': job})
 
 
