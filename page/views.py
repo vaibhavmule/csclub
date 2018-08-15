@@ -39,7 +39,3 @@ def signup(request):
 
 def home_files(request, filename):
     return render(request, filename, {}, content_type="text/plain")
-
-
-def handler404(request):
-    return render(request, '404.html', status=404)
