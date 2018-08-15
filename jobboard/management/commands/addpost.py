@@ -34,5 +34,5 @@ class Command(BaseCommand):
                 Redirect.objects.create(
                     site=site,
                     old_path='/blog/' + post['slug'] + '/',
-                    new_path='/' + username + '/' + post_obj.slug + '/')
+                    new_path='/@' + username + '/' + post_obj.slug + '/')
                 self.stdout.write(self.style.SUCCESS('ok'))
