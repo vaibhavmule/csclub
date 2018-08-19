@@ -92,7 +92,7 @@ at {{job.employer.title}} in {{job.location}}{% endblock%}
   {% if job.apply_email %}
   <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
   {% else %}
-  <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_link}}">Apply</a>
+  <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
   {% endif %}
   <br>
  <p>Share this job:</p>
