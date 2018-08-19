@@ -23,7 +23,7 @@ def jobs_by_employer(request, slug):
 
 
 def companies(request):
-    companies = Employer.objects.all()
+    companies = Employer.objects.all().order_by('-created')
     return render(request, 'companies.html', {'companies': companies})
 
 
