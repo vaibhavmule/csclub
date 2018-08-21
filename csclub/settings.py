@@ -29,7 +29,7 @@ SESSION_COOKIE_SECURE = True
 
 ADMINS = [('Vaibhav', 'vaibhavmule135@gmail.com'), ]
 
-SERVER_EMAIL = 'no-replay@csclub.co'
+SERVER_EMAIL = 'no-reply@csclub.co'
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'postmaster@mg.csclub.co'
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'blog',
     'bulma',
     'ckeditor',
+    'social_django',
+    'authentication',
 ]
 
 SITE_ID = 1
