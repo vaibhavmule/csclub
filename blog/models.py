@@ -2,12 +2,14 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
+from django.conf import settings
 
 from csclub.models import BaseModel
 
 
 class Post(BaseModel):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     text = models.TextField()

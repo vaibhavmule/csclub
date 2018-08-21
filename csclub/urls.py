@@ -18,6 +18,7 @@ sitemaps = {
 urlpatterns = [
     path('favicon.ico', favicon_view),
     path('admin/', admin.site.urls),
+    path('oauth/', include('social_django.urls', namespace='social')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/singup/', signup, name='signup'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

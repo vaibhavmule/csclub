@@ -38,8 +38,6 @@ EMAIL_USE_TLS = True
 
 ALLOWED_HOSTS = ['localhost', 'beta.csclub.co', '167.99.173.188']
 
-LOGIN_REDIRECT_URL = '/'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -71,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'csclub.urls'
@@ -86,6 +85,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -159,3 +160,34 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
 
 
 ADMIN_SITE_HEADER = "CSClub"
+
+AUTH_USER_MODEL = 'authentication.User'
+
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2052486238315444'
+SOCIAL_AUTH_FACEBOOK_SECRET = '4669cd01c7d94e36d87dba9b0eb43fcd'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '403724887015-lp1p4gpifhs4r5dbe73vls7uo4a5cdl1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '7Jzanj1q5PEbppUdjTrN3UPe'
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)

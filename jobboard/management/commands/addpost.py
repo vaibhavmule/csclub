@@ -2,10 +2,11 @@ import os
 import wxr_parser
 
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
 from django.contrib.redirects.models import Redirect
 from django.contrib.sites.models import Site
 from django.conf import settings
+
+from authentication.models import User
 from blog.models import Post
 
 

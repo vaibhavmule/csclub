@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from authentication.models import User
 from django.contrib.syndication.views import Feed
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
