@@ -11,6 +11,8 @@
             <img src="https://res.cloudinary.com/csclub/image/upload/v1535008654/btn_google_signin_dark_normal_web.png"/>
           </a>
           <hr>
+          <p><strong>Sign up with your email address</strong></p>
+          <br>
           {% if form.errors %}
           <p>Your username and password didn't match. Please try again.</p>
           {% endif %}
@@ -24,7 +26,7 @@
               {% endif %}
           {% endif %}
 
-          <form method="post" action="{% url 'login' %}">
+          <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
             {{ form|bulma }}
             <br>
@@ -39,7 +41,7 @@
           </form>
           <br>
           <p>
-            <strong>Already have an account? <a href="{% url 'signup' %}">Login</a></strong>
+            <strong>Already have an account? <a href="{% url 'login' %}">Login</a></strong>
           </p>
         </div>
       </div>
