@@ -89,11 +89,17 @@ at {{job.employer.title}} in {{job.location}}{% endblock%}
   <p><strong>Expiration date: </strong> {{job.expiry_date|date:"d-m-Y"}}</p>
   <p><strong>Date Posted: </strong> {{job.date_posted|date:"d-m-Y"}}</p>
   <br>
+
+  {% if user.is_authenticated %}
   {% if job.apply_email %}
   <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
   {% else %}
   <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
   {% endif %}
+  {% else %}
+  <a class="button is-success is-medium is-fullwidth" href="{% url 'login' %}?next={{request.path}}">Login to Apply</a>
+  {% endif %}
+  <br>
   <br>
  <p>Share this job:</p>
  <div class="sharethis-inline-share-buttons"></div>
