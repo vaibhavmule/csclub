@@ -25,7 +25,7 @@ SECRET_KEY = '*d-v!q=12d&7e8l_39dyb*)@9g4&dv8kh038*a1#n*yx8_70lr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 ADMINS = [('Vaibhav', 'vaibhavmule135@gmail.com'), ]
 
@@ -164,6 +164,7 @@ ADMIN_SITE_HEADER = "CSClub"
 AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 

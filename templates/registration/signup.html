@@ -1,42 +1,50 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load bulma_tags %}
+{% block title %}Sign Up{% endblock%}
 {% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <a href="{% url 'social:begin' 'google-oauth2' %}">
+            <img src="https://res.cloudinary.com/csclub/image/upload/v1535008654/btn_google_signin_dark_normal_web.png"/>
+          </a>
+          <hr>
+          {% if form.errors %}
+          <p>Your username and password didn't match. Please try again.</p>
+          {% endif %}
 
-<section class="section">
-    <div class="container">
-            <div class="columns is-centered">
-  <div class="column is-half">
-    <div class="box is-info">
-            {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+          {% if next %}
+              {% if user.is_authenticated %}
+              <p>Your account doesn't have access to this page. To proceed,
+              please login with an account that has access.</p>
+              {% else %}
+              <p>Please login to see this page.</p>
+              {% endif %}
+          {% endif %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'signup' %}">
-{% csrf_token %}
-{{ form|bulma }}
-<br>
-<div class="field">
-  <p class="control">
-    <button class="button is-primary is-medium is-fullwidth" type="submit">
-    Sign Up
-    </button>
-  </p>
-</div>
-</form>
-<br>
-  </div>
-</div>
-
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form|bulma }}
+            <br>
+            <div class="field">
+              <p class="control">
+                <button class="button is-primary is-medium is-fullwidth" type="submit">
+                Create My Account
+                </button>
+              </p>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+          </form>
+          <br>
+          <p>
+            <strong>Already have an account? <a href="{% url 'signup' %}">Login</a></strong>
+          </p>
         </div>
-</div>
+      </div>
+    </div>
+  </div>
 </section>
+
 {% endblock %}
