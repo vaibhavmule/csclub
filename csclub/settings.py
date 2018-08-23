@@ -169,12 +169,12 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY = '2052486238315444'
-SOCIAL_AUTH_FACEBOOK_SECRET = '4669cd01c7d94e36d87dba9b0eb43fcd'
+# SOCIAL_AUTH_FACEBOOK_KEY = '2052486238315444'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '4669cd01c7d94e36d87dba9b0eb43fcd'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '403724887015-lp1p4gpifhs4r5dbe73vls7uo4a5cdl1.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '7Jzanj1q5PEbppUdjTrN3UPe'
 
