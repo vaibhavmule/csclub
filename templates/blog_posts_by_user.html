@@ -35,7 +35,7 @@
                 <p class="title is-4">
                   {% if post.published_date is null %}
                     <a href="{% url 'post_edit' post.pk %}" class="has-text-black">
-                      {{post.title}} <span class="tag is-primary">Draft</span>
+                      {{post.title}} <span class="tag is-primary">In Review</span>
                     </a>
                   {% else %}
                     <a href="{% url 'post_detail' post.author.username post.slug %}" class="has-text-black">{{post.title}}</a>

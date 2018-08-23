@@ -16,7 +16,7 @@
           </p>
         </div>
         <div class="column is-narrow is-2">
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user == post.author %}
           <a class="button is-primary is-medium is-inverted" href="{% url 'post_edit' post.pk %}">
               Edit
           </a>
