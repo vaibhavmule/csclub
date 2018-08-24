@@ -32,8 +32,8 @@ class Command(BaseCommand):
                     text=post['content'],
                     published_date=post['pub_date'])
                 post_obj.save()
-                Redirect.objects.create(
-                    site=site,
-                    old_path='/blog/' + post['slug'] + '/',
-                    new_path='/@' + username + '/' + post_obj.slug + '/')
+                # Redirect.objects.create(
+                #     site=site,
+                #     old_path='/blog/' + post['slug'] + '/',
+                #     new_path='/@' + username + '/' + post_obj.slug + '/')
                 self.stdout.write(self.style.SUCCESS('ok'))
