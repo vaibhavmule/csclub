@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('page.urls')),
     path('job/', include('jobboard.urls')),
     path('blog/', include('blog.urls')),
+    path('notes/', include('notes.urls')),
     path('companies/', companies, name='companies'),
     path('companies/<slug:slug>/', jobs_by_employer, name='jobs_by_employer'),
     path('@<username>/<slug:slug>/', post_detail, name='post_detail'),

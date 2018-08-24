@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'social_django',
     'authentication',
+    'notes'
 ]
 
 SITE_ID = 1

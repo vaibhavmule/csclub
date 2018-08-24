@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}{{companies.count}} Companies listed at{% endblock %}
+{% block description %}{{companies.count}} Companies listed at CSClub{% endblock%}
+{% block og_title %}{{companies.count}} Companies listed at{% endblock %}
+{% block og_description %}{{companies.count}} Companies listed at CSClub{% endblock%}
+{% block twitter_title %}{{companies.count}} Companies listed at{% endblock %}
+{% block twitter_description %}{{companies.count}} Companies listed at CSClub{% endblock%}
+{% block content %}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Notes</h1>
+<!--           <p class="subtitle">{{companies.count}} Companies listed at <a href="/">CSClub</a></p> -->
+        </div>
+        <div class="column is-narrow is-4 has-text-centered">
+          <a class="button is-primary is-medium is-inverted" href="{% url 'post_new' %}">
+            Upload Note
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        {% for note in notes %}
+        <div class="card">
+          <div class="card-content">  
+            <div class="media">
+<!--               <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="{{company.logo.url}}" alt="{{company.title}}">
+                </figure>
+              </div> -->
+              <div class="media-content">
+                <p class="title is-4">
+                  <a href="{{note.file_url}}" class="has-text-black" download>{{note.title}}</a>
+                </p>
+                <p class="subtitle is-6">{{note.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <p class="title is-5">Subscribe to our newsletter</p>
+                <!-- Begin MailChimp Signup Form -->
+      <div id="mc_embed_signup">
+      <form action="https://csclub.us18.list-manage.com/subscribe/post?u=ca2165e2939a1f54044177ea9&amp;id=962fb4fe8f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+        
+      <div class="mc-field-group">
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input required email" type="email" placeholder="Email address" value="" name="EMAIL" id="mce-EMAIL">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+      </div>
+        <div id="mce-responses" class="clear">
+          <div class="response" id="mce-error-response" style="display:none"></div>
+          <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca2165e2939a1f54044177ea9_962fb4fe8f" tabindex="-1" value=""></div>
+          <br>
+          <div class="clear control"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button is-link is-medium is-fullwidth"></div>
+          </div>
+      </form>
+      </div>
+
+      <!--End mc_embed_signup-->
+        </div>
+        <div class="box">
+          <p class="title is-5">Follow us:</p>
+          <div class="sharethis-inline-follow-buttons"></div>
+        </div>
+      </div>
+            
+    </div>
+  </div>
+</section>
+{% endblock %}
