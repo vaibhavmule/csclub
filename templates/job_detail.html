@@ -94,13 +94,15 @@ at {{job.employer.title}} in {{job.location}}{% endblock%}
   <br>
 
   {% if user.is_authenticated %}
-  {% if job.apply_email %}
-  <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
+    {% if job.is_expired %}
+    <a class="button is-success is-medium is-fullwidth" disbaled>Apply</a> 
+    {% elif job.apply_email %}
+    <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
+    {% elif job.apply_link %}
+    <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
+    {% endif %}
   {% else %}
-  <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
-  {% endif %}
-  {% else %}
-  <a class="button is-success is-medium is-fullwidth" href="{% url 'login' %}?next={{request.path}}">Login to Apply</a>
+    <a class="button is-success is-medium is-fullwidth" href="{% url 'login' %}?next={{request.path}}">Login to Apply</a>
   {% endif %}
   <br>
   <br>
