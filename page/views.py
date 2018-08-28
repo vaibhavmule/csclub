@@ -1,11 +1,12 @@
 from django.shortcuts import render
-
+from django.utils import timezone
 
 from jobboard.models import Job
 
 
 def home(request):
-    jobs = Job.objects.all().order_by('-date_posted')
+    jobs = Job.objects.exclude(
+        expiry_date__lte=timezone.now()).order_by('-date_posted')
     return render(request, 'jobs.html', {'jobs': jobs})
 
 

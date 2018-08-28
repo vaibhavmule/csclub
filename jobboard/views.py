@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.syndication.views import Feed
 from django.contrib.sitemaps import Sitemap
+from django.utils import timezone
 from django.urls import reverse
 
 from jobboard.models import Job, Employer
 
 
 def jobs(request):
-    jobs = Job.objects.all().order_by('-date_posted')
+    jobs = Job.objects.exclude(
+        expiry_date__lte=timezone.now()).order_by('-date_posted')
     return render(request, 'jobs.html', {'jobs': jobs})
 
 
@@ -33,7 +35,8 @@ class LatestJobsFeed(Feed):
     description = "CS Trainee Vacancy and CS Jobs"
 
     def items(self):
-        return Job.objects.all().order_by('-date_posted')[:5]
+        return Job.objects.exclude(
+            expiry_date__lte=timezone.now()).order_by('-date_posted')[:5]
 
     def item_title(self, item):
         return item.title
