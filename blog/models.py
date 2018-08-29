@@ -33,3 +33,19 @@ class Post(BaseModel):
         return reverse(
             'post_detail',
             kwargs={'username': self.author.username, 'slug': self.slug})
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        'blog.Post', on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField()
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
