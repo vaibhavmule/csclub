@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
-{% block description %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
-{% block og_title %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
-{% block og_description %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
-{% block twitter_title %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
-{% block twitter_description %}Jobs - CS Trainee Vacancies and CS Jobs{% endblock %}
+{% block title %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
+{% block description %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
+{% block og_title %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
+{% block og_description %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
+{% block twitter_title %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
+{% block twitter_description %}{% if employer %} Jobs at {{employer.title}}{% else %}Jobs - CS Trainee Vacancies and CS Jobs{% endif %}{% endblock %}
 {% block head %}<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script> {% endblock %}
 {% block content %}
 <section class="hero is-primary">
@@ -12,7 +12,7 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title">Jobs {% if employer %} by {{employer.title}}{% endif%}</h1>
+          <h1 class="title">Jobs {% if employer %} at {{employer.title}}{% endif%}</h1>
           <p class="subtitle">CS Trainee Vacancies and CS Jobs</p>
         </div>
 <!--         <div class="column is-narrow is-4 has-text-centered">
