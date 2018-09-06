@@ -49,6 +49,9 @@ class Job(BaseModel):
     def get_absolute_url(self):
         return reverse('job_detail', kwargs={'slug': self.slug})
 
+    def is_expired(self):
+        return self.expiry_date < timezone.now()
+
     def json_ld(self):
         return json.dumps({
             '@context': 'http://schema.org/',

@@ -21,49 +21,23 @@ def download_file():
     return local_filename
 
 
-def str_to_date(s):
-    if s.startswith('Reposted on '):
-        dt = datetime.strptime(
-            s.replace('Reposted on ', ''), '%d-%m-%Y').date()
-        print('dt', dt)
-        return dt
-    elif s.startswith('Re posted on '):
-        dt = datetime.strptime(
-            s.replace('Re posted on ', ''), '%d-%m-%Y').date()
-        print('dt', dt)
-        return dt
-    elif s.startswith('Re-posted on '):
-        dt = datetime.strptime(
-            s.replace('Re-posted on ', ''), '%d-%m-%Y').date()
-        print('dt', dt)
-        return dt
-    elif s.startswith('Resposted on '):
-        dt = datetime.strptime(
-            s.replace('Resposted on ', ''), '%d/%m/%Y').date()
-        print('dt', dt)
-        return dt
-    else:
-        # todo - email to me
-        return datetime.strptime(s, '%d/%m/%Y').date()
+def sanitize_date(s):
+    if isinstance(s, datetime):
+        return s
+    return datetime.strptime(s, '%d/%m/%Y')
 
 
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=1)
+    now = datetime.now() - timedelta(days=2)
     for col in h_column[2:20]:
-        d = col.value
-
-        # print(isinstance(d, datetime), d.date(), now.date())
-
-        if isinstance(d, datetime) and d.date() >= now.date():
-            max_col += 1
-        elif isinstance(d, str) and str_to_date(d) and str_to_date(d) >= now.date():
+        d = sanitize_date(col.value)
+        if d.date() >= now.date():
             max_col += 1
         else:
             print(max_col)
             break
-
     return max_col
 
 
@@ -112,6 +86,9 @@ def add_cs_trainee_job(row):
     Posted on
     """
     d = row[7].value
+    str_d = sanitize_date(row[7].value)
+    print(str_d)
+    print(isinstance(str_d, datetime))
     if isinstance(d, datetime):
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
@@ -141,18 +118,36 @@ def add_cs_trainee_job(row):
         )
         job.save()
         job.employment_type.add(employment_type)
-    else:
+    elif isinstance(str_d, datetime):
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
             row[1].value, row[6].value),)
-        print("<strong>Company Name:</strong> {} <br/><strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Location:</strong> {} <br/><strong>Email:</strong> {} <br/><strong>Contact Person:</strong> {} <br/><br/> <strong>Source:</strong> {} at <a href='https://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'>ICSI</a>".format(
-            row[1].value,
+        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Contact Person:</strong> {}".format(
             row[5].value,
             row[2].value,
-            row[6].value,
-            row[3].value,
-            row[4].value,
-            row[7].value))
+            row[4].value)
+        print(html)
+        date_posted = str_d
+        employer = None
+        if Employer.objects.filter(title=row[1].value).exists():
+            employer = Employer.objects.get(title=row[1].value)
+        else:
+            employer = Employer.objects.create(title=row[1].value)
+        job = Job(
+            title="CS Trainee",
+            description=html,
+            employer=employer,
+            location=row[6].value,
+            date_posted=date_posted,
+            apply_email=row[3].value)
+        employment_type, created = EmploymentType.objects.get_or_create(
+            title='Internship',
+            value='INTERN',
+        )
+        job.save()
+        job.employment_type.add(employment_type)
+    else:
+        print('not-happening---------')
 
 
 class Command(BaseCommand):
