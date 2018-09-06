@@ -21,32 +21,9 @@ def download_file():
     return local_filename
 
 
-# def str_to_date(s):
-#     if s.startswith('Reposted on '):
-#         dt = datetime.strptime(
-#             s.replace('Reposted on ', ''), '%d-%m-%Y').date()
-#         print('dt', dt)
-#         return dt
-#     elif s.startswith('Re posted on '):
-#         dt = datetime.strptime(
-#             s.replace('Re posted on ', ''), '%d-%m-%Y').date()
-#         print('dt', dt)
-#         return dt
-#     elif s.startswith('Re-posted on '):
-#         dt = datetime.strptime(
-#             s.replace('Re-posted on ', ''), '%d-%m-%Y').date()
-#         print('dt', dt)
-#         return dt
-#     elif s.startswith('Resposted on '):
-#         dt = datetime.strptime(
-#             s.replace('Resposted on ', ''), '%d/%m/%Y').date()
-#         print('dt', dt)
-#         return dt
-#     else:
-#         return datetime.strptime(s, '%d/%m/%Y').date()
-
-
-def str_to_date(s):
+def sanitize_date(s):
+    if isinstance(s, datetime):
+        return s
     return datetime.strptime(s, '%d/%m/%Y')
 
 
@@ -55,18 +32,12 @@ def max_row(sheet):
     max_col = 2
     now = datetime.now() - timedelta(days=2)
     for col in h_column[2:20]:
-        d = col.value
-
-        # print(isinstance(d, datetime), d.date(), now.date())
-
-        if isinstance(d, datetime) and d.date() >= now.date():
-            max_col += 1
-        elif isinstance(d, str) and str_to_date(d) and str_to_date(d) >= now:
+        d = sanitize_date(col.value)
+        if d.date() >= now.date():
             max_col += 1
         else:
             print(max_col)
             break
-
     return max_col
 
 
