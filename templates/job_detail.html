@@ -97,7 +97,7 @@ at {{job.employer.title}} in {{job.location}}{% endblock%}
     {% if job.is_expired %}
     <a class="button is-success is-medium is-fullwidth" disbaled>Apply</a> 
     {% elif job.apply_email %}
-    <a class="button is-success is-medium is-fullwidth" href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">Apply</a>
+    <strong>Apply: </strong><a href="mailto:{{job.apply_email}}?subject=Application for {{job.title}} at {{job.employer.title}}&body=Hi%21%0A%0AI'd like to apply for your position for {{job.title}} on CSClub">{{job.apply_email}}</a>
     {% elif job.apply_link %}
     <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
     {% endif %}

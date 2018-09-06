@@ -86,7 +86,7 @@ def add_cs_trainee_job(row):
     Posted on
     """
     d = row[7].value
-    str_d = str_to_date(row[7].value)
+    str_d = sanitize_date(row[7].value)
     print(str_d)
     print(isinstance(str_d, datetime))
     if isinstance(d, datetime):
