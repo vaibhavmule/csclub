@@ -9,7 +9,7 @@ from jobboard.models import Job, Employer, EmploymentType, AddJobLog
 
 
 def download_file():
-    url = 'http://www.icsi.edu/Docs/Webmodules/Requirement.xlsx'
+    url = 'https://www.icsi.edu/media/webmodules/Requirement.xlsx'
     local_filename = '/tmp/' + url.split('/')[-1]
     print('Downloading File...', local_filename)
     r = requests.get(url, stream=True)
@@ -22,6 +22,8 @@ def download_file():
 
 
 def sanitize_date(s):
+    if isinstance(s, str) and s.startswith('Reposted'):
+        return s
     if isinstance(s, datetime):
         return s
     return datetime.strptime(s, '%d/%m/%Y')
@@ -30,10 +32,12 @@ def sanitize_date(s):
 def max_row(sheet):
     h_column = sheet['H']
     max_col = 2
-    now = datetime.now() - timedelta(days=2)
+    now = datetime.now() - timedelta(days=7)
     for col in h_column[2:20]:
         d = sanitize_date(col.value)
-        if d.date() >= now.date():
+        if isinstance(d, str):
+            max_col += 1
+        elif d.date() >= now.date():
             max_col += 1
         else:
             print(max_col)
@@ -154,8 +158,8 @@ class Command(BaseCommand):
     help = 'Add jobs from ICSI'
 
     def handle(self, *args, **options):
-        is_latest, job_log = is_latest_file()
-        if is_latest:
+        # is_latest, job_log = is_latest_file()
+        if True:
             file_path = download_file()
             wb = openpyxl.load_workbook(file_path)
             sheet = wb.active
@@ -164,6 +168,6 @@ class Command(BaseCommand):
             if mx_row > 2:
                 for row in iter_rows:
                     add_cs_trainee_job(tuple(row))
-            job_log.is_downloaded = True
-            job_log.save()
+            # job_log.is_downloaded = True
+            # job_log.save()
         self.stdout.write(self.style.SUCCESS('ok'))
