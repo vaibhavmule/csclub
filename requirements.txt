@@ -1,13 +1,2 @@
-certifi==2018.4.16
-chardet==3.0.4
-Django==2.0.7
-django-bulma==0.5.1
-django-ckeditor==5.6.1
-et-xmlfile==1.0.1
-idna==2.7
-jdcal==1.4
-openpyxl==2.5.4
-Pillow==5.2.0
-pytz==2018.5
-requests==2.19.1
-urllib3==1.23
+waitress==1.1.0
+masonite>=2.0,<=2.0.99
