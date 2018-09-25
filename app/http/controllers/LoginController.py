@@ -13,7 +13,7 @@ class LoginController(object):
         return view('auth/login', {'app': Application, 'Auth': Auth(Request)})
 
     def store(self, Request):
-        if Auth(Request).login(Request.input('username'), Request.input('password')):
+        if Auth(Request).login(Request.input('email'), Request.input('password')):
             Request.redirect('/home')
         else:
             Request.redirect('/login')
