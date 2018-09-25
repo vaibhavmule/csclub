@@ -1,5 +1,7 @@
 ''' A Job Database Model '''
 from config.database import Model
+from orator.orm import belongs_to
+
 
 class Job(Model):
     __fillable__ = ['title', 'slug', 'date_posted', 'description', 'location', 'expiry_date', 'salary', 'salary_unit', 'apply_link', 'apply_email', 'employer_id', 'employment_type_id']
