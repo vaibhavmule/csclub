@@ -4,7 +4,7 @@ from config import auth
 import bcrypt
 
 
-class RegisterController(object):
+class RegisterController:
     ''' Class Docstring Description '''
 
     def __init__(self):

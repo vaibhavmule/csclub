@@ -2,7 +2,7 @@
 from masonite.facades.Auth import Auth
 
 
-class LoginController(object):
+class LoginController:
     ''' Login Form Controller '''
 
     def __init__(self):
