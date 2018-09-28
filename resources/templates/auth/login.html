@@ -1,4 +1,4 @@
-{% extends 'auth/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -7,6 +7,10 @@
     <div class="container has-text-centered">
       <div class="columns is-centered">
         <div class="column is-half">
+            <a href="/">
+              <img src="https://res.cloudinary.com/csclub/image/upload/v1535008654/btn_google_signin_dark_normal_web.png"/>
+            </a>
+            <hr>
             <form action="/login" method="POST">
             {{ csrf_field|safe }}
             <div class="field">

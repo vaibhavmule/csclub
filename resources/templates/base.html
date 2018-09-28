@@ -64,11 +64,11 @@
             </a>
           </div>
 
-          {% if Auth.user() %}
+          {% if auth() %}
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
-                vaibhavmule
+                {{ auth().name }}
               </a>
 
               <div class="navbar-dropdown is-right">

@@ -1,14 +1,18 @@
-{% extends 'auth/base.html' %} 
+{% extends 'base.html' %} 
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">Dashboard</div>
-            <div class="panel-body">
-                This is a dashboard. Hello {{ Auth.user().name }}
+<section class="hero">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <div class="columns is-centered">
+              <div class="column is-half">
+                    <h1 class="title">Dashboard</h1>
+                    <h2 class="subtitle">
+                        This is a dashboard. Hello {{ auth().name }}
+                    </h2>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </section>
 {% endblock %}
