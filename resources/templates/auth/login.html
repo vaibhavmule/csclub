@@ -1,30 +1,48 @@
 {% extends 'auth/base.html' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xs-4 col-xs-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                <form action="/login" method="POST">
-                    {{ csrf_field|safe }}
 
-                    <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="text" name="email" class="form-control">    
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="password" name="password" class="form-control">    
-                    </div>
-                    
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-success">Login</button>
-                    </div>
-                </form>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-half">
+            <form action="/login" method="POST">
+            {{ csrf_field|safe }}
+            <div class="field">
+                <label class="label" for="">Email</label>
+                <div class="control">
+                    <input type="text" name="email" class="input">    
                 </div>
-            </div>    
+            </div>
+
+            <div class="field">
+                <label class="label" for="">Password</label>
+            <div class="control">
+                <input type="password" name="password" class="input"> 
+            </div>   
+            </div>
+            <br>
+            <div class="field">
+              <div class="control">
+                <button class="button is-primary is-medium is-fullwidth" type="submit">
+                Login
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <p>
+            <small><a href="/">Forget your password?</a></small>
+          </p>
+          <br>
+          <p>
+            <strong>Don't have an account? <a href="/register">Sign up.</a></strong>
+          </p>
         </div>
+      </div>
     </div>
+  </div>
+</section>
+
 {% endblock %}

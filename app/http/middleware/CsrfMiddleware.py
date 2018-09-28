@@ -43,6 +43,8 @@ class CsrfMiddleware:
             if not self.csrf.verify_csrf_token(token):
                 raise InvalidCSRFToken("Invalid CSRF token.")
         else:
+            if self.request.get_cookie('csrf_token', decrypt=False):
+                return self.request.get_cookie('csrf_token', decrypt=False)
             token = self.csrf.generate_csrf_token()
 
         return token
