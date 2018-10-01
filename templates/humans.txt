@@ -1,8 +1,0 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
- 
-# TEAM
-    Vaibhav Mule -- Creator -- @vaibhavmule
- 
-# TECHNOLOGY COLOPHON
-    Python, Django, HTML5, Bulma, JavaScript
