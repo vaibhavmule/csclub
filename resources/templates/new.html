@@ -25,7 +25,7 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <input type="text" name="description" class="input" placeholder="Description">    
+                  <textarea class="textarea" placeholder="Job Description"></textarea>  
                 </div>
             </div>
             <div class="field">
@@ -40,7 +40,7 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <input type="text" name="apply_link" class="input" placeholder="Website Link to Apply">    
+                    <input type="text" name="apply_link" class="input" placeholder="Website Link to Apply (optional)">    
                 </div>
             </div>
             <div class="field">
@@ -48,6 +48,30 @@
                     <input type="text" name="apply_email" class="input" placeholder="Email">    
                 </div>
             </div>
+            <div class="field">
+              <div class="control">
+                  <input type="text" name="employer_title" class="input" placeholder="Company Name">    
+              </div>
+          </div>
+          <div class="field">
+            <div class="control">
+                <input type="text" name="employer_website" class="input" placeholder="Company Website">    
+            </div>
+          </div>
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
+          <br>
             <div class="field">
               <div class="control">
                 <button class="button is-primary is-medium is-fullwidth" type="submit">
