@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - {{ app.NAME }}</title>
+    <meta name="description" content="{% block description %}CSClub is job board for CS trainees and CS professionals.
+{% endblock %}">
+    <link rel="author" href="humans.txt" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% block og_title %}{% endblock%} - CSClub" />
+    <meta property="og:description" content="{% block og_description %}{% endblock%}" />
+<!--     <meta property="og:url" content="https://csclub.co/" /> -->
+    <meta property="og:site_name" content="CSClub" />
+    <meta property="article:publisher" content="https://www.facebook.com/csclub.co/" />
+    <meta property="article:author" content="http://facebook.com/vaibhavmule" />
+    <meta property="og:image" content="https://res.cloudinary.com/csclub/image/upload/v1534308349/facebook-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="{% block twitter_description %}{% endblock%}" />
+    <meta name="twitter:title" content="{% block twitter_title %}{% endblock%} - CSClub" />
+    <meta name="twitter:site" content="@csclubco" />
+    <meta name="twitter:creator" content="@vaibhavmule" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/csclub/image/upload/v1534308350/twitter-default.png" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b71661104b9a500117b0f8b&product=sop' async='async'></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-9064508961850811",
+              enable_page_level_ads: true
+         });
+    </script>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar is-transparent">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="#" alt="CSClub Job Board">
+          </a>
+          <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/job/">
+              Jobs
+            </a>
+            <a class="navbar-item" href="/companies/">
+              Companies
+            </a>
+            <a class="navbar-item" href="/blog/">
+              Blog
+            </a>
+            <a class="navbar-item" href="/contact/">
+              Contact
+            </a>
+          </div>
+
+          {% if auth() %}
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                {{ auth().name }}
+              </a>
+
+              <div class="navbar-dropdown is-right">
+                <a class="navbar-item" href="/">
+                  My Articles
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="/logout">
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {% else %}
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="field is-grouped">
+                  <p class="control">
+                    <a class="bd-tw-button button" href="/login">
+                      <span>
+                        Login
+                      </span>
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a class="button is-primary" href="/register">
+                      <span>Sign Up</span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </nav>  
+    {% block content %}
+    {% endblock %}
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+<!--           ©<strong>CSClub</strong>.  -->
+          <strong>CSClub</strong> by <a href="https://vaibhavmule.com">Vaibhav Mule</a> <!-- <br> All Rights Reserved. -->
+        </p>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+  </script>
+</html>
