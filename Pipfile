@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 masonite = "==2.1.0b2"
-"psycopg2" = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 waitress = "==1.1.0"

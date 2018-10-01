@@ -5,5 +5,5 @@ class JobController:
     """JobController Controller
     """
 
-    def show(self):
+    def index(self):
         pass

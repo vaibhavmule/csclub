@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <a href="/">
+            <img src="https://res.cloudinary.com/csclub/image/upload/v1535008654/btn_google_signin_dark_normal_web.png"/>
+          </a>
+          <hr>
+          <p><strong>Sign up with your email address</strong></p>
+          <br>
+
+          <form method="post" action="/register">
+            {{ csrf_field|safe }}
+            <br>
+            <div class="field">
+                <div class="control">
+                    <input type="text" name="name" class="input" placeholder="Username">    
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input type="text" name="email" class="input" placeholder="Email">    
+                </div>
+            </div>
+
+            <div class="field">
+            <div class="control">
+                <input type="password" name="password" class="input" placeholder="Password"> 
+            </div>   
+            </div>
+            <div class="field">
+              <p class="control">
+                <button class="button is-primary is-medium is-fullwidth" type="submit">
+                Create My Account
+                </button>
+              </p>
+            </div>
+          </form>
+          <br>
+          <p>
+            <strong>Already have an account? <a href="/login">Login</a></strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
