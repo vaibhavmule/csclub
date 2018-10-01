@@ -8,6 +8,8 @@ ROUTES = [
 
     # Jobs
     Get().route('/jobs', 'JobController@index'),
+    Post().route('/jobs', 'JobController@create'),
+    Get().route('/jobs/new', 'JobController@new'),
 ]
 
 ROUTES = ROUTES + [
