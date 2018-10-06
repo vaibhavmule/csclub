@@ -11,14 +11,11 @@ from app.EmploymentType import EmploymentType
 
 
 class JobController:
-    """JobController Controller
+    """JobController
     """
 
     def index(self, view: View, request: Request):
         jobs = Job.all()
-        print(len(jobs))
-        for job in jobs:
-            print(job.employment_type.all())
         return view.render("index", {"jobs": jobs, 'app': request.app().make('Application')})
 
     def create(self, request: Request):
@@ -28,23 +25,25 @@ class JobController:
             website=request.input('employer_website')
         )
 
-        employment_type = EmploymentType.create(
-            title="Internship",
-            slug="internship",
-            value="INTERNSHIP"
-        )
+        employment_type = EmploymentType.find(1)
 
-        Job.create(
+        job = Job(
             title=request.input('title'),
             description=request.input('description'),
-            slug=slugify(request.input('title')),
             employer_id=employer.id,
+            slug = '',
             employment_type_id=employment_type.id,
             location=request.input('location'),
             salary=request.input('salary'),
             apply_link=request.input('apply_link'),
             apply_email=request.input('apply_email'),
         )
+
+        job.save()
+
+        job.slug = slugify(request.input('title') + " " + str(job.id)),
+
+        job.save()
 
         return request.redirect('/')
 
