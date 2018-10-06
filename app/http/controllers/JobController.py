@@ -50,3 +50,6 @@ class JobController:
     def new(self, view: View):
         return view.render('new')
 
+    def show(self, view: View, request: Request):
+        jobs = Job.where('slug', request.param('slug')).get()
+        return view.render('show', {"job": jobs[0]})
