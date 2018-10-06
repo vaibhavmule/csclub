@@ -1,3 +1,5 @@
+import datetime
+
 from orator.migrations import Migration
 
 
@@ -7,14 +9,17 @@ class CreateJobsTable(Migration):
         """
         Run the migrations.
         """
+        now = datetime.datetime.now()
+        from_now_30_days = now + datetime.timedelta(days=30)
+
         with self.schema.create('jobs') as table:
             table.increments('id')
             table.string('title', 50)
             table.string('slug')
-            table.timestamp('date_posted')
+            table.timestamp('date_posted').default(now)
             table.long_text('description')
             table.string('location')
-            table.datetime('expiry_date')
+            table.datetime('expiry_date').default(from_now_30_days)
             table.decimal('salary', 7, 2)
             table.enum('salary_unit', ['Month', 'Year']).nullable()
             table.string('apply_link').nullable()

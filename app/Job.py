@@ -13,5 +13,5 @@ class Job(Model):
 
     @belongs_to('employment_type_id', 'id')
     def employment_type(self):
-        from app.EmployerType import EmployerType
-        return EmployerType
+        from app.EmploymentType import EmploymentType
+        return EmploymentType

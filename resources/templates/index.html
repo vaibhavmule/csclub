@@ -38,7 +38,7 @@
             <div class="column">
               <span class="is-size-5">{{job.title}}</span>
   
-                                {% for employment_type in job.employment_type.all %}
+                {% for employment_type in job.employment_type.all() %}
                 <span class="tag is-link">{{employment_type.title}}</span>
                 {% endfor %}
   <br/>
