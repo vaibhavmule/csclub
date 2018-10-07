@@ -40,10 +40,7 @@ class LoginController:
         """
 
         if Auth(request).login(request.input('email'), request.input('password')):
-            if request.has('__back'):
-                return request.redirect(request.input('__back'))
-            else:
-                pass
+            return request.back()
 
         return request.redirect('/login')
 

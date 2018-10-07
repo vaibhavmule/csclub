@@ -17,7 +17,7 @@ class JobController:
 
     def index(self, view: View, request: Request):
         jobs = Job.all()
-        return view.render("index", {"jobs": jobs, 'app': request.app().make('Application')})
+        return view.render("job/index", {"jobs": jobs, 'app': request.app().make('Application')})
 
     def create(self, request: Request):
         employer = Employer.first_or_create(
@@ -49,19 +49,19 @@ class JobController:
         return request.redirect('/')
 
     def new(self, view: View):
-        return view.render('new')
+        return view.render('job/new')
 
     def show(self, view: View, request: Request):
         jobs = Job.where('slug', request.param('slug')).get()
-        return view.render('show', {"job": jobs[0]})
+        return view.render('job/show', {"job": jobs[0]})
 
     def companies(self, view: View):
         companies = Employer.all()
-        return view.render('companies', {'companies': companies})
+        return view.render('job/companies', {'companies': companies})
 
     def show_company(self, view: View, request: Request):
         employer = Employer.where('slug', request.param('slug')).get()[0]
         jobs = Job.where('employer_id', employer.id).get()
-        return view.render('index', {'jobs': jobs, 'employer': employer})
+        return view.render('job/index', {'jobs': jobs, 'employer': employer})
 
         

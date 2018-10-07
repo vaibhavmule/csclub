@@ -4,7 +4,11 @@ from masonite.routes import Get, Post
 
 
 ROUTES = [
+    # Pages
     Get().route('/', 'PageController@index'),
+    Get().route('/about', 'PageController@about'),
+    Get().route('/privacy', 'PageController@privacy'),
+    Get().route('/contact', 'PageController@contact'),
 
     # Jobs
     Get().route('/jobs', 'JobController@index'),

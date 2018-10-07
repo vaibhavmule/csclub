@@ -11,4 +11,13 @@ class PageController:
 
     def index(self, view: View, request: Request):
         jobs = Job.all()
-        return view.render("index", {"jobs": jobs, 'app': request.app().make('Application')})
+        return view.render("job/index", {"jobs": jobs, 'app': request.app().make('Application')})
+
+    def about(self, view: View):
+        return view.render('about')
+    
+    def privacy(self, view: View):
+        return view.render('privacy')
+
+    def contact(self, view: View):
+        return view.render('contact')
