@@ -18,6 +18,9 @@ ROUTES = [
     Get().route('/companies', 'JobController@companies'),
     Get().route('/companies/@slug', 'JobController@show_company'),
 
+    # Blog
+    Get().route('/blog', 'BlogController@index')
+
 ]
 
 ROUTES = ROUTES + [
