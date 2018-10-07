@@ -1,15 +1,19 @@
 """ Web Routes """
 
-from masonite.routes import Get, Post, Match
+from masonite.routes import Get, Post
 
 
 ROUTES = [
     Get().route('/', 'PageController@index'),
 
     # Jobs
-    Match(['GET', 'POST']).route('/jobs', 'JobController@index'),
+    Get().route('/jobs', 'JobController@index'),
+    Post().route('/jobs', 'JobController@create'),
     Get().route('/jobs/new', 'JobController@new'),
     Get().route('/jobs/@slug', 'JobController@show'),
+    Get().route('/companies', 'JobController@companies'),
+    Get().route('/companies/@slug', 'JobController@show_company'),
+
 ]
 
 ROUTES = ROUTES + [

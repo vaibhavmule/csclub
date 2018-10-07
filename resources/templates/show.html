@@ -75,7 +75,7 @@
   <p><strong>Date Posted: </strong> {{job.date_posted}}</p>
   <br>
 
-  {% if True %}
+  {% if auth() %}
     {% if job.is_expired %}
     <a class="button is-success is-medium is-fullwidth" disbaled>Apply</a> 
     {% elif job.apply_email %}
@@ -84,7 +84,7 @@
     <a class="button is-success is-medium is-fullwidth" href="{{job.apply_link}}">Apply</a>
     {% endif %}
   {% else %}
-    <a class="button is-success is-medium is-fullwidth" href="/login?next={{request.path}}">Login to Apply</a>
+    <a class="button is-success is-medium is-fullwidth" href="/login?back={{request().path}}">Login to Apply</a>
   {% endif %}
   <br>
   <br>

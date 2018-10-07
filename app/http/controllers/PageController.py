@@ -11,5 +11,4 @@ class PageController:
 
     def index(self, view: View, request: Request):
         jobs = Job.all()
-        print(len(jobs))
         return view.render("index", {"jobs": jobs, 'app': request.app().make('Application')})

@@ -25,7 +25,8 @@ class LoginController:
         Returns:
             masonite.view.View -- Returns the Masonite view class.
         """
-
+        if request.has('back'):
+            request.session.flash('back', request.input('back'))
         return view.render('auth/login', {'app': request.app().make('Application'), 'Auth': Auth(request)})
 
     def store(self, request: Request):
@@ -38,8 +39,11 @@ class LoginController:
             masonite.request.Request -- The Masonite request class.
         """
 
-        if Auth(request).login(request.input('username'), request.input('password')):
-            return request.redirect('/')
+        if Auth(request).login(request.input('email'), request.input('password')):
+            if request.has('__back'):
+                return request.redirect(request.input('__back'))
+            else:
+                pass
 
         return request.redirect('/login')
 

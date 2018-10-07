@@ -2,6 +2,7 @@
 
 from slugify import slugify
 
+from masonite.auth import Auth
 from masonite.view import View
 from masonite.request import Request
 
@@ -53,3 +54,14 @@ class JobController:
     def show(self, view: View, request: Request):
         jobs = Job.where('slug', request.param('slug')).get()
         return view.render('show', {"job": jobs[0]})
+
+    def companies(self, view: View):
+        companies = Employer.all()
+        return view.render('companies', {'companies': companies})
+
+    def show_company(self, view: View, request: Request):
+        employer = Employer.where('slug', request.param('slug')).get()[0]
+        jobs = Job.where('employer_id', employer.id).get()
+        return view.render('index', {'jobs': jobs, 'employer': employer})
+
+        

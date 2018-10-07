@@ -12,7 +12,10 @@
             </a>
             <hr>
             <form action="/login" method="POST">
-            {{ csrf_field|safe }}
+            {{ csrf_field }}
+            {% if request().input('back') %}
+            {{ back(request().input('back')) }}
+            {% endif %}
             <div class="field">
                 <label class="label" for="">Email</label>
                 <div class="control">
