@@ -7,6 +7,9 @@ from masonite.providers import (AppProvider, BroadcastProvider, CacheProvider,
                                 StatusCodeProvider, UploadProvider,
                                 ViewProvider, WhitenoiseProvider)
 
+
+from app.providers.RouteCompilerProvider import RouteCompilerProvider
+
 """Providers List
 Providers are a simple way to remove or add functionality for Masonite
 The providers in this list are either ran on server start or when a
@@ -38,5 +41,5 @@ PROVIDERS = [
     # Third Party Providers
 
     # Application Providers
-
+    RouteCompilerProvider,
 ]
