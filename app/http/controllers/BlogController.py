@@ -39,4 +39,3 @@ class BlogController:
         posts = Post.where(
             'slug', request.param('slug')).get()
         return view.render('blog/show', {"post": posts[0]})
-    
