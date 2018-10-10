@@ -4,16 +4,10 @@
 <section class="hero is-primary">
   <div class="hero-body">
     <div class="container">
-      <div class="columns">
-        <div class="column">
-          <h1 class="title">
-            <a href="/contact">Contact CSClub</a>
-          </h1>
-          <p class="subtitle">
-            Give us feedback or contact us for anything else.
-          </p>
-        </div>
-      </div>
+      <h1 class="title">
+        Publish your Article
+      </h1>
+      <p class="subtitle">The article will be submitted for review and will be published within a week.</p>
     </div>
   </div>
 </section>
@@ -21,16 +15,23 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <div class="content">
-          <p>Click on following links to know more.</p>
-          <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/privacy">Privacy</a></li>
-          </ul>
-            <a class="button is-link is-medium is-fullwidth" href="https://m.me/csclub.co">
-              Send us message
-            </a>
+      	<form method="POST" action="/blog/{{post.id}}" >
+        {{ csrf_field }}
+        <div class="field">
+            <div class="control">
+                <input type="text" name="title" class="input" value="{{post.title}}" placeholder="Title">    
+            </div>
         </div>
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" placeholder="Text" name="text">{{post.text}}</textarea>  
+            </div>
+        </div>
+	   <div class="field">
+	     <button type="submit" class="button is-primary">Submit</button>
+	   </div>
+    	</form>
+
       </div>
       <div class="column is-4">
         <div class="box">

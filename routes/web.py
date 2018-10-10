@@ -33,5 +33,7 @@ ROUTES = [
     Get().route('/blog/new', 'BlogController@new').middleware('auth'),
     Get().route('/@username/@slug', 'BlogController@show'),
     Get().route('/@username', 'BlogController@user_posts'),
+    Get().route('/blog/@id/edit', 'BlogController@edit'),
+    Post().route('/blog/@id', 'BlogController@update'),
 
 ]

@@ -25,20 +25,16 @@ class BlogController:
             title=request.input('title'),
             text=request.input('text'),
             author_id=request.user().id,
-            slug = '',
+            slug = slugify(request.input('title'))
         )
-
-        post.save()
-
-        post.slug = slugify(request.input('title')),
 
         post.save()
 
         return request.redirect('/blog')
 
     def show(self, view: View, request: Request):
-        post = Post.where(
-            'slug', request.param('slug')).first_or_fail()
+        author = User.where('username', request.param('username')).first_or_fail()
+        post = Post.where('slug', request.param('slug')).where('author_id', author.id).first_or_fail()
         return view.render('blog/show', {"post": post})
 
     def user_posts(self, view: View, request: Request):
@@ -51,3 +47,20 @@ class BlogController:
             
         return view.render('blog/user_posts', {'posts': posts, 'author': author})
 
+    def edit(self, view: View, request: Request):
+        post = Post.where('id', request.param('id')).first_or_fail()
+        return view.render('blog/edit', {'post': post})
+
+    def update(self, request: Request):
+
+        post = Post.where('id', request.param('id')).first_or_fail()
+
+        post.title=request.input('title'),
+        post.text=request.input('text'),
+        post.slug=slugify(request.input('title')),
+
+        post.save()
+
+        post = Post.where('id', request.param('id')).first_or_fail()
+
+        return request.redirect(f"/{post.author.username}/{post.slug}")

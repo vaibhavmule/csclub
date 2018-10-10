@@ -42,7 +42,7 @@ class JobController:
 
         job.save()
 
-        job.slug = slugify(request.input('title') + " " + str(job.id)),
+        job.slug = slugify(request.input('title') + " " + str(job.id))
 
         job.save()
 
