@@ -7,6 +7,6 @@ class User(Model):
     """User Model
     """
 
-    __fillable__ = ['name', 'email', 'password']
+    __fillable__ = ['username', 'email', 'password']
 
     __auth__ = 'email'

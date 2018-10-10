@@ -43,7 +43,7 @@ class RegisterController:
         password = bcrypt_password(request.input('password'))
 
         user = auth.AUTH['model'].create(
-            name=request.input('name'),
+            username=request.input('username'),
             password=password,
             email=request.input('email'),
         )
