@@ -21,7 +21,8 @@ class AuthenticationMiddleware:
         """
 
         if not self.request.user():
-            self.request.redirect_to('login')
+            self.request.redirect(f'/login?back={self.request.path}')
+
 
     def after(self):
         """Run This Middleware After The Route Executes
