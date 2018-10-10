@@ -22,7 +22,7 @@ ROUTES = [
     # Jobs
     Get().route('/jobs', 'JobController@index'),
     Post().route('/jobs', 'JobController@create'),
-    Get().route('/jobs/new', 'JobController@new'),
+    Get().route('/jobs/new', 'JobController@new').middleware('auth'),
     Get().route('/jobs/@slug', 'JobController@show'),
     Get().route('/companies', 'JobController@companies'),
     Get().route('/companies/@slug', 'JobController@show_company'),
