@@ -7,15 +7,15 @@
       <div class="columns">
         <div class="column">
           <h1 class="title">
-            <a href="/{{post.author.name}}/{{post.slug}}">{{post.title}}</a>
+            <a href="/{{post.author.username}}/{{post.slug}}">{{post.title}}</a>
           </h1>
           <p class="subtitle">
-            by <a href="/{{post.author.name}}">{{post.author_id.username}}</a>
+            by <a href="/{{post.author.username}}">{{post.author.username}}</a>
           </p>
         </div>
         <div class="column is-narrow is-2">
           {% if auth() and auth().id == post.author_id %}
-          <a class="button is-primary is-medium is-inverted" href="/blog/post.pk/edit %}">
+          <a class="button is-primary is-medium is-inverted" href="/blog/{{post.id}}/edit">
               Edit
           </a>
           {% else %}
