@@ -1,3 +1,5 @@
+import datetime
+
 from orator.migrations import Migration
 
 
@@ -16,7 +18,7 @@ class CreatePostsTable(Migration):
             table.foreign('author_id').references('id').on('users')
 
             table.string('text')
-            table.timestamp('published_date')
+            table.timestamp('published_date').default(datetime.datetime.now())
     
             table.timestamps()
 

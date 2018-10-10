@@ -7,7 +7,7 @@ from orator.orm import belongs_to
 class Post(Model):
     """Post Model
     """
-    __fillable__ = ['title', 'author_id', 'text', 'slug', 'published_date']
+    __fillable__ = ['title', 'author_id', 'text', 'slug']
 
     @belongs_to('author_id', 'id')
     def author(self):

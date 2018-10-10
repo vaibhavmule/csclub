@@ -1,4 +1,4 @@
-""" A JobController Module """
+"""A JobController Module"""
 
 from slugify import slugify
 
