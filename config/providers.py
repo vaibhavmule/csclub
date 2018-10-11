@@ -7,7 +7,6 @@ from masonite.providers import (AppProvider, BroadcastProvider, CacheProvider,
                                 StatusCodeProvider, UploadProvider,
                                 ViewProvider, WhitenoiseProvider)
 
-
 from app.providers.RouteCompilerProvider import RouteCompilerProvider
 
 """Providers List

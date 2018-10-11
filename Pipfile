@@ -10,6 +10,7 @@ python-slugify = "*"
 
 [dev-packages]
 waitress = "==1.1.0"
+pylint = "*"
 
 [scripts]
 postgres = "pipenv install psycopg2-binary"

@@ -1,7 +1,7 @@
 """Web Routes"""
+import os
 
 from masonite.routes import Get, Post
-
 
 ROUTES = [
     # Feed
