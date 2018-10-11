@@ -6,6 +6,7 @@ from masonite.routes import Get, Post
 ROUTES = [
     # Feed
     Get().route('/blog/feed', 'FeedController@blog'),
+    Get().route('/jobs/feed', 'FeedController@job'),
 
     # Auth
     Get().route('/login', 'LoginController@show').name('login'),

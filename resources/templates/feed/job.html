@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>CSClub Jobs</title>
+    <description>CS Trainee Vacancies and CS Jobs</description>
+    <link>http://csclub.co/jobs/</link>
+    {% for job in jobs %}
+      <item>
+        <title>
+          <![CDATA[{{ job.title }}]]>
+        </title>
+        <link>http://csclub.co/jobs/{{job.slug}}</link>
+        <description>
+          <![CDATA[{{ job.description }}]]>
+        </description>
+        <pubDate>{{job.date_posted}}</pubDate>
+        <guid isPermaLink="true">http://csclub.co/jobs/{{job.slug}}</guid>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>
