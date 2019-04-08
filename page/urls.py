@@ -6,6 +6,6 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('privacy/', privacy, name='privacy'),
     path('contact/', contact, name='contact'),
-    path('android-app-survey', android, name='android'),
+    path('android-app-survey/', android, name='android'),
     path('<filename>', home_files, name='home_files'),
 ]
