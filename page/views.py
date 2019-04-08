@@ -22,9 +22,13 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+def android(request):
+    return render(request, 'android.html')
+
 def home_files(request, filename):
     if filename in ['OneSignalSDKUpdaterWorker.js', 'OneSignalSDKWorker.js']:
         return render(request, filename, content_type="text/javascript")
     if filename == 'manifest.json':
         return render(request, filename, content_type="text/json")
     return render(request, filename, content_type="text/plain")
+
