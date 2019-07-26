@@ -5,6 +5,7 @@ import openpyxl
 from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand
+from django.utils.text import slugify
 from jobboard.models import Job, Employer, EmploymentType, AddJobLog
 
 
@@ -22,18 +23,23 @@ def download_file():
 
 
 def sanitize_date(s):
-    if isinstance(s, str) and s.startswith('Reposted'):
+    if isinstance(s, str) and (s.startswith('Reposted') or s.startswith('Re posted on')):
         return s
     if isinstance(s, datetime):
         return s
-    return datetime.strptime(s, '%d/%m/%Y')
+    if '.' in s:
+        return datetime.strptime(s.strip(), '%d.%m.%Y')
+    if '/' in s:
+        return datetime.strptime(s.strip(), '%d/%m/%Y')
+    if '-' in s:
+        return datetime.strptime(s.strip(), '%d-%m-%Y')
 
 
 def max_row(sheet):
-    h_column = sheet['H']
+    h_column = sheet['G']
     max_col = 2
-    now = datetime.now() - timedelta(days=7)
-    for col in h_column[2:20]:
+    now = datetime.now() - timedelta(days=250)
+    for col in h_column[2:197]:
         d = sanitize_date(col.value)
         if isinstance(d, str):
             max_col += 1
@@ -84,36 +90,35 @@ def add_cs_trainee_job(row):
     Company Name
     Address
     Email id
-    Contact Person Name
     Requirement
     Location
     Posted on
     """
-    d = row[7].value
-    str_d = sanitize_date(row[7].value)
-    print(str_d)
+    d = row[6].value
+    str_d = sanitize_date(row[6].value)
     print(isinstance(str_d, datetime))
     if isinstance(d, datetime):
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
-            row[1].value, row[6].value),)
-        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Contact Person:</strong> {}".format(
-            row[5].value,
-            row[2].value,
-            row[4].value)
+            row[1].value, row[5].value),)
+        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {}".format(
+            row[4].value,
+            row[2].value)
         print(html)
         date_posted = datetime.combine(
             d, datetime.now().time())
         employer = None
-        if Employer.objects.filter(title=row[1].value).exists():
-            employer = Employer.objects.get(title=row[1].value)
+        slug = slugify(row[1].value)
+        if Employer.objects.filter(slug=slug).exists():
+            employer = Employer.objects.get(slug=slug)
         else:
+            print('here you go')
             employer = Employer.objects.create(title=row[1].value)
         job = Job(
             title="CS Trainee",
             description=html,
             employer=employer,
-            location=row[6].value,
+            location=row[5].value,
             date_posted=date_posted,
             apply_email=row[3].value)
         employment_type, created = EmploymentType.objects.get_or_create(
@@ -125,23 +130,23 @@ def add_cs_trainee_job(row):
     elif isinstance(str_d, datetime):
         print('----------------------------------------\n')
         print("{} Looking for CS Trainees in {}".format(
-            row[1].value, row[6].value),)
-        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {} <br/><strong>Contact Person:</strong> {}".format(
-            row[5].value,
-            row[2].value,
-            row[4].value)
+            row[1].value, row[5].value),)
+        html = "<strong>Requirement:</strong> {} <br/><strong>Address:</strong> {}".format(
+            row[4].value,
+            row[2].value)
         print(html)
         date_posted = str_d
         employer = None
-        if Employer.objects.filter(title=row[1].value).exists():
-            employer = Employer.objects.get(title=row[1].value)
+        slug = slugify(row[1].value)
+        if Employer.objects.filter(slug=slug).exists():
+            employer = Employer.objects.get(slug=slug)
         else:
             employer = Employer.objects.create(title=row[1].value)
         job = Job(
             title="CS Trainee",
             description=html,
             employer=employer,
-            location=row[6].value,
+            location=row[5].value,
             date_posted=date_posted,
             apply_email=row[3].value)
         employment_type, created = EmploymentType.objects.get_or_create(
@@ -167,6 +172,7 @@ class Command(BaseCommand):
             iter_rows = sheet.iter_rows(min_row=3, max_col=8, max_row=mx_row)
             if mx_row > 2:
                 for row in iter_rows:
+                    print(row)
                     add_cs_trainee_job(tuple(row))
             # job_log.is_downloaded = True
             # job_log.save()
